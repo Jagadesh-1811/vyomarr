@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Vyomarr Space Explorer</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fvyomarrsp6457back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.5"></script>
+</head>
+<body class="bg-background text-text-primary min-h-screen">
+    <div id="navbar"></div>
+
+    <!-- Hero Section -->
+    <section class="relative py-16 bg-gradient-to-br from-primary via-secondary to-background overflow-hidden">
+        <!-- Animated Background -->
+        <div class="absolute inset-0 opacity-30">
+            <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-accent rounded-full animate-pulse"></div>
+            <div class="absolute top-1/3 right-1/3 w-1 h-1 bg-text-secondary rounded-full animate-pulse delay-1000"></div>
+            <div class="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-accent/60 rounded-full animate-pulse delay-500"></div>
+            <div class="absolute top-1/2 right-1/4 w-1 h-1 bg-text-secondary/80 rounded-full animate-pulse delay-1500"></div>
+            <div class="absolute bottom-1/3 right-1/2 w-2 h-2 bg-accent/40 rounded-full animate-pulse delay-2000"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-clash font-bold mb-6 text-balance">
+                Get in <span class="text-accent">Touch</span>
+            </h1>
+            <p class="text-lg md:text-xl text-text-secondary mb-8 max-w-2xl mx-auto text-balance">
+                Have questions about space mysteries? Want to share your theories? We'd love to hear from you.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact Content Section -->
+    <section class="py-16 bg-background">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Main Contact Form -->
+                <div class="lg:col-span-8">
+                    <div class="bg-surface rounded-cosmic border-cosmic p-6 md:p-8 cosmic-glow-subtle">
+                        <h2 class="text-2xl md:text-3xl font-clash font-bold mb-6">Send us a Message</h2>
+                        
+                        <form id="contact-form" class="space-y-6">
+                            <!-- Name Field -->
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-text-primary mb-2">
+                                    Full Name <span class="text-error">*</span>
+                                </label>
+                                <input type="text" id="name" name="name" required class="w-full bg-background border border-cosmic rounded-cosmic px-4 py-3 text-text-primary placeholder-text-secondary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-cosmic" placeholder="Enter your full name" />
+                                <div class="error-message hidden text-error text-sm mt-1" id="name-error"></div>
+                            </div>
+
+                            <!-- Email Field -->
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-text-primary mb-2">
+                                    Email Address <span class="text-error">*</span>
+                                </label>
+                                <input type="email" id="email" name="email" required class="w-full bg-background border border-cosmic rounded-cosmic px-4 py-3 text-text-primary placeholder-text-secondary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-cosmic" placeholder="Enter your email address" />
+                                <div class="error-message hidden text-error text-sm mt-1" id="email-error"></div>
+                            </div>
+
+                            <!-- Subject Dropdown -->
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-text-primary mb-2">
+                                    Subject <span class="text-error">*</span>
+                                </label>
+                                <select id="subject" name="subject" required class="w-full bg-background border border-cosmic rounded-cosmic px-4 py-3 text-text-primary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-cosmic">
+                                    <option value>Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="technical">Technical Support</option>
+                                    <option value="content">Content Suggestion</option>
+                                    <option value="partnership">Partnership</option>
+                                </select>
+                                <div class="error-message hidden text-error text-sm mt-1" id="subject-error"></div>
+                            </div>
+
+                            <!-- Message Textarea -->
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-text-primary mb-2">
+                                    Message <span class="text-error">*</span>
+                                </label>
+                                <textarea id="message" name="message" rows="6" required class="w-full bg-background border border-cosmic rounded-cosmic px-4 py-3 text-text-primary placeholder-text-secondary focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-cosmic resize-vertical" placeholder="Tell us about your inquiry, theory, or feedback..."></textarea>
+                                <div class="error-message hidden text-error text-sm mt-1" id="message-error"></div>
+                            </div>
+
+                            <!-- File Attachment -->
+                            <div>
+                                <label for="attachment" class="block text-sm font-medium text-text-primary mb-2">
+                                    Attachment (Optional)
+                                </label>
+                                <div class="relative">
+                                    <input type="file" id="attachment" name="attachment" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png" class="hidden" />
+                                    <label for="attachment" class="flex items-center justify-center w-full bg-background border border-cosmic border-dashed rounded-cosmic px-4 py-6 cursor-pointer hover:border-accent transition-cosmic">
+                                        <div class="text-center">
+                                            <svg class="w-8 h-8 text-text-secondary mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                                            </svg>
+                                            <p class="text-text-secondary text-sm">
+                                                <span class="text-accent">Click to upload</span> or drag and drop
+                                            </p>
+                                            <p class="text-text-secondary text-xs mt-1">PDF, DOC, TXT, JPG, PNG (max 10MB)</p>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div id="file-name" class="text-sm text-text-secondary mt-2 hidden"></div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="pt-4">
+                                <button type="submit" id="submit-btn" class="w-full bg-accent text-white py-3 px-6 rounded-cosmic font-semibold hover:bg-accent/80 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-background transition-cosmic cosmic-glow disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <span id="submit-text">Send Message</span>
+                                    <div id="submit-spinner" class="hidden inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin ml-2"></div>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Success Message -->
+                        <div id="success-message" class="hidden mt-6 p-4 bg-success/10 border border-success/20 rounded-cosmic">
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-success mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                </svg>
+                                <p class="text-success font-medium">Message sent successfully! We'll get back to you within 24 hours.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:col-span-4">
+                    <div class="space-y-8">
+                        <!-- Contact Information -->
+                        <div class="bg-surface rounded-cosmic border-cosmic p-6 cosmic-glow-subtle">
+                            <h3 class="text-xl font-clash font-bold mb-4">Contact Information</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3">
+                                    
+                    
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <svg class="w-5 h-5 text-accent mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                                    </svg>
+                                    <div>
+                                        <p class="font-medium text-text-primary">Gmail</p>
+                                        <p class="text-text-secondary text-sm">mohanreddysaigovindu@gmail.com</p>
+                                    </div>
+                                </div>
+                            
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Response Time -->
+                        <div class="bg-surface rounded-cosmic border-cosmic p-6 cosmic-glow-subtle">
+                            <h3 class="text-xl font-clash font-bold mb-4">Response Time</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-2 h-2 bg-success rounded-full"></div>
+                                    <div>
+                                        <p class="text-sm font-medium text-text-primary">General Inquiries</p>
+                                        <p class="text-xs text-text-secondary">Within 24 hours</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-2 h-2 bg-warning rounded-full"></div>
+                                    <div>
+                                        <p class="text-sm font-medium text-text-primary">Technical Support</p>
+                                        <p class="text-xs text-text-secondary">Within 48 hours</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-2 h-2 bg-accent rounded-full"></div>
+                                    <div>
+                                        <p class="text-sm font-medium text-text-primary">Partnerships</p>
+                                        <p class="text-xs text-text-secondary">Within 1 week</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media -->
+                        <div class="bg-surface rounded-cosmic border-cosmic p-6 cosmic-glow-subtle">
+                            <h3 class="text-xl font-clash font-bold mb-4">Follow Us</h3>
+                            <div class="flex space-x-4">
+                                <!-- LinkedIn Icon -->
+                                <a href="https://www.linkedin.com/in/govindumohan/" class="social-icon linkedin-icon text-text-secondary hover:text-accent transition-cosmic p-2 rounded-full relative group">
+                                <svg class="w-5 h-5 transform group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                                <div class="absolute inset-0 bg-blue-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10"></div>
+                            </a>
+
+                            <!-- YouTube Icon -->
+                                <a href="https://www.youtube.com/@vyomarr" class="social-icon youtube-icon text-text-secondary hover:text-accent transition-cosmic p-2 rounded-full relative group">
+                                    <svg class="w-5 h-5 transform group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-red-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10"></div>
+                    </a>
+                    
+                    <!-- Instagram Icon -->
+                    <a href="https://www.instagram.com/vyomarr/?igsh=eWdhbDlpc21maGx4#" class="social-icon instagram-icon text-text-secondary hover:text-accent transition-cosmic p-2 rounded-full relative group">
+                        <svg class="w-5 h-5 transform group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10"></div>
+                    </a>
+
+                    <!-- Discord Icon -->
+                    <a href="https://discord.gg/your-discord-invite" class="social-icon discord-icon text-text-secondary hover:text-accent transition-cosmic p-2 rounded-full relative group">
+                        <svg class="w-5 h-5 transform group-hover:scale-110 group-hover:-translate-y-1 transition-all duration-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1568 2.4189Z"/>
+                        </svg>
+                        <div class="absolute inset-0 bg-indigo-600 rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-300 -z-10"></div>
+                    </a>
+                    </div>
+                </div>
+
+                    <!-- FAQ Links -->
+                    <div class="bg-surface rounded-cosmic border-cosmic p-6 cosmic-glow-subtle">
+                        <h3 class="text-xl font-clash font-bold mb-4">Quick Help</h3>
+                            <div class="space-y-2">
+                                <a href="how to submit a theory.html" class="block text-text-secondary hover:text-accent transition-cosmic text-sm">
+                                    How to submit a theory?
+                                </a>
+                                <a href="issues.html" class="block text-text-secondary hover:text-accent transition-cosmic text-sm">
+                                    Account & Login Issues
+                                </a>
+                                <a href="#" class="block text-text-secondary hover:text-accent transition-cosmic text-sm">
+                                    Content Guidelines
+                                </a>
+                                <a href="data.html" class="block text-text-secondary hover:text-accent transition-cosmic text-sm">
+                                    Privacy & Data Policy
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <div id="footer"></div>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // File Upload Handler
+        document.getElementById('attachment').addEventListener('change', function(e) {
+            const fileName = document.getElementById('file-name');
+            if (e.target.files.length > 0) {
+                fileName.textContent = `Selected: ${e.target.files[0].name}`;
+                fileName.classList.remove('hidden');
+            } else {
+                fileName.classList.add('hidden');
+            }
+        });
+
+        // Contact Form Validation and Submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            document.querySelectorAll('.error-message').forEach(el => el.classList.add('hidden'));
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name').trim();
+            const email = formData.get('email').trim();
+            const subject = formData.get('subject');
+            const message = formData.get('message').trim();
+            
+            let hasErrors = false;
+            
+            // Validate name
+            if (!name) {
+                showError('name-error', 'Name is required');
+                hasErrors = true;
+            }
+            
+            // Validate email
+            if (!email) {
+                showError('email-error', 'Email is required');
+                hasErrors = true;
+            } else if (!isValidEmail(email)) {
+                showError('email-error', 'Please enter a valid email address');
+                hasErrors = true;
+            }
+            
+            // Validate subject
+            if (!subject) {
+                showError('subject-error', 'Please select a subject');
+                hasErrors = true;
+            }
+            
+            // Validate message
+            if (!message) {
+                showError('message-error', 'Message is required');
+                hasErrors = true;
+            } else if (message.length < 10) {
+                showError('message-error', 'Message must be at least 10 characters long');
+                hasErrors = true;
+            }
+            
+            if (!hasErrors) {
+                submitForm();
+            }
+        });
+
+        function showError(elementId, message) {
+            const errorElement = document.getElementById(elementId);
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function submitForm() {
+            const submitBtn = document.getElementById('submit-btn');
+            const submitText = document.getElementById('submit-text');
+            const submitSpinner = document.getElementById('submit-spinner');
+            const successMessage = document.getElementById('success-message');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.textContent = 'Sending...';
+            submitSpinner.classList.remove('hidden');
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Hide loading state
+                submitBtn.disabled = false;
+                submitText.textContent = 'Send Message';
+                submitSpinner.classList.add('hidden');
+                
+                // Show success message
+                successMessage.classList.remove('hidden');
+                
+                // Reset form
+                document.getElementById('contact-form').reset();
+                document.getElementById('file-name').classList.add('hidden');
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 2000);
+        }
+
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+<script src="load.js"></script>
+</body>
+</html>

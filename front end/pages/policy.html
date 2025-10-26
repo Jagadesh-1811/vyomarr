@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Vyomarr</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': 'var(--color-primary)',
+                        'secondary': 'var(--color-secondary)',
+                        'accent': 'var(--color-accent)',
+                        'background': 'var(--color-background)',
+                        'surface': 'var(--color-surface)',
+                        'text-primary': 'var(--color-text-primary)',
+                        'text-secondary': 'var(--color-text-secondary)',
+                        'success': 'var(--color-success)',
+                        'warning': 'var(--color-warning)',
+                        'error': 'var(--color-error)',
+                        'border-subtle': 'var(--border-subtle)',
+                        'border-accent': 'var(--border-accent)',
+                    },
+                    fontFamily: {
+                        'clash': ['"Clash Display"', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif'],
+                        'jetbrains': ['"JetBrains Mono"', 'monospace'],
+                    },
+                    boxShadow: {
+                        'cosmic': 'var(--shadow-cosmic)',
+                        'subtle': 'var(--shadow-subtle)',
+                        'moderate': 'var(--shadow-moderate)',
+                        'prominent': 'var(--shadow-prominent)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* CSS Variables for the theme */
+        :root {
+            --color-primary: #000B49;
+            --color-secondary: #1B1F30;
+            --color-accent: #4F46E5;
+            --color-background: #121212;
+            --color-surface: #121212;
+            --color-text-primary: #F8FAFC;
+            --color-text-secondary: #94A3B8;
+            --color-success: #10B981;
+            --color-warning: #F59E0B;
+            --color-error: #EF4444;
+            --shadow-cosmic: 0 4px 20px rgba(79, 70, 229, 0.15);
+            --shadow-subtle: 0 2px 8px rgba(79, 70, 229, 0.1);
+            --shadow-moderate: 0 8px 32px rgba(79, 70, 229, 0.2);
+            --shadow-prominent: 0 16px 48px rgba(79, 70, 229, 0.25);
+            --border-subtle: rgba(148, 163, 184, 0.2);
+            --border-accent: var(--color-accent);
+        }
+
+        /* Base styles */
+        @layer base {
+            body {
+                font-feature-settings: "rlig" 1, "calt" 1;
+                background-image: radial-gradient(at 0% 0%, var(--color-surface) 0px, var(--color-background) 50%);
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-inter min-h-screen">
+    <div id="navbar"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+        <header class="text-center mb-12 md:mb-20 p-8 bg-surface rounded-2xl shadow-moderate">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-clash font-bold text-transparent bg-clip-text bg-gradient-to-r from-accent via-success to-warning mb-4">
+                Privacy Policy
+            </h1>
+            <p class="text-lg text-text-secondary max-w-3xl mx-auto">
+                Last Updated: August 14, 2025
+            </p>
+        </header>
+
+        <main>
+            <div class="space-y-12">
+
+                <div class="bg-surface rounded-2xl p-8 text-center shadow-cosmic">
+                    <h2 class="text-3xl font-clash font-semibold text-accent mb-4">Our Commitment to Your Privacy</h2>
+                    <p class="text-lg text-text-secondary max-w-4xl mx-auto">
+                        Vyomarr ("we", "us", or "our") is dedicated to protecting your privacy. This policy explains how we collect, use, and safeguard your data when you use our services to connect with the global space enthusiast community.
+                    </p>
+                </div>
+
+                <div class="bg-surface rounded-2xl shadow-cosmic overflow-hidden">
+                    <div class="flex items-center gap-6 p-6 bg-secondary border-b border-border-subtle flex-wrap justify-center sm:justify-start">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-accent to-success flex items-center justify-center text-xl font-bold text-text-primary shadow-cosmic">1</div>
+                        <h3 class="text-2xl font-clash font-semibold text-text-primary text-center sm:text-left">
+                            Our Core Privacy Principles
+                        </h3>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <p class="text-text-secondary text-lg mb-6">Our data protection framework is built upon six core principles that guide every decision we make regarding your personal information.</p>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            <div class="bg-secondary p-6 rounded-lg border border-border-subtle">
+                                <h4 class="font-semibold text-text-primary mb-2">Transparency</h4>
+                                <p class="text-text-secondary">We process data lawfully and are always clear about what we collect and why.</p>
+                            </div>
+                            <div class="bg-secondary p-6 rounded-lg border border-border-subtle">
+                                <h4 class="font-semibold text-text-primary mb-2">Purpose Limitation</h4>
+                                <p class="text-text-secondary">We collect data for specific, explicit purposes and don't repurpose it.</p>
+                            </div>
+                            <div class="bg-secondary p-6 rounded-lg border border-border-subtle">
+                                <h4 class="font-semibold text-text-primary mb-2">Data Minimization</h4>
+                                <p class="text-text-secondary">We only collect data that is relevant and necessary for our services.</p>
+                            </div>
+                            <div class="bg-secondary p-6 rounded-lg border border-border-subtle">
+                                <h4 class="font-semibold text-text-primary mb-2">Accuracy</h4>
+                                <p class="text-text-secondary">We take reasonable steps to ensure your data is accurate and up to date.</p>
+                            </div>
+                             <div class="bg-secondary p-6 rounded-lg border border-border-subtle">
+                                <h4 class="font-semibold text-text-primary mb-2">Storage Limitation</h4>
+                                <p class="text-text-secondary">We don't keep your personal data for longer than necessary.</p>
+                            </div>
+                            <div class="bg-secondary p-6 rounded-lg border border-border-subtle">
+                                <h4 class="font-semibold text-text-primary mb-2">Security</h4>
+                                <p class="text-text-secondary">We use appropriate measures to protect your data from unauthorized access or loss.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-surface rounded-2xl shadow-cosmic overflow-hidden">
+                    <div class="flex items-center gap-6 p-6 bg-secondary border-b border-border-subtle flex-wrap justify-center sm:justify-start">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-accent to-success flex items-center justify-center text-xl font-bold text-text-primary shadow-cosmic">2</div>
+                        <h3 class="text-2xl font-clash font-semibold text-text-primary text-center sm:text-left">
+                            Information We Collect
+                        </h3>
+                    </div>
+                    <div class="p-6 md:p-8 space-y-6">
+                        <div class="p-6 bg-secondary rounded-lg border-l-4 border-accent">
+                            <h4 class="text-xl font-clash font-semibold text-accent mb-2">Personal Information</h4>
+                            <p class="text-text-secondary">This is data you voluntarily provide that identifies you, such as your name and email address when you create an account, subscribe to a newsletter, or contact support.</p>
+                        </div>
+                        <div class="p-6 bg-secondary rounded-lg border-l-4 border-accent">
+                            <h4 class="text-xl font-clash font-semibold text-accent mb-2">Usage Data and Analytics</h4>
+                            <p class="text-text-secondary">We automatically collect technical information when you use our services, including your IP address, browser type, device information, and Browse patterns on our site.</p>
+                        </div>
+                        <div class="p-6 bg-secondary rounded-lg border-l-4 border-accent">
+                            <h4 class="text-xl font-clash font-semibold text-accent mb-2">Cookies and Tracking Technologies</h4>
+                            <p class="text-text-secondary">We use cookies (small text files stored on your device) to remember your preferences, maintain your login session, and help us understand how you interact with our services.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-surface rounded-2xl shadow-cosmic overflow-hidden">
+                    <div class="flex items-center gap-6 p-6 bg-secondary border-b border-border-subtle flex-wrap justify-center sm:justify-start">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-accent to-success flex items-center justify-center text-xl font-bold text-text-primary shadow-cosmic">3</div>
+                        <h3 class="text-2xl font-clash font-semibold text-text-primary text-center sm:text-left">
+                            How We Use Your Information
+                        </h3>
+                    </div>
+                    <div class="p-6 md:p-8 grid md:grid-cols-2 gap-6">
+                        <div class="p-6 bg-secondary rounded-lg">
+                            <h4 class="text-lg font-semibold text-text-primary mb-2">Service Provision</h4>
+                            <p class="text-text-secondary">To create and maintain your account, process requests, and deliver the core features of our platform.</p>
+                        </div>
+                        <div class="p-6 bg-secondary rounded-lg">
+                            <h4 class="text-lg font-semibold text-text-primary mb-2">Personalization</h4>
+                            <p class="text-text-secondary">To analyze your interactions and customize your experience with relevant content and recommendations.</p>
+                        </div>
+                        <div class="p-6 bg-secondary rounded-lg">
+                            <h4 class="text-lg font-semibold text-text-primary mb-2">Communication</h4>
+                            <p class="text-text-secondary">To send you newsletters, updates, and other community-related information you've opted into.</p>
+                        </div>
+                        <div class="p-6 bg-secondary rounded-lg">
+                            <h4 class="text-lg font-semibold text-text-primary mb-2">Security & Compliance</h4>
+                            <p class="text-text-secondary">To protect our platform, prevent fraud, and comply with applicable laws and regulations.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                     <div class="bg-surface rounded-2xl p-8 shadow-cosmic">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-r from-accent to-success flex items-center justify-center font-bold">4</div>
+                            <h3 class="font-clash text-xl font-semibold">Data Sharing & Disclosure</h3>
+                        </div>
+                        <p class="text-text-primary font-semibold mb-2">We do not sell your personal information.</p>
+                        <p class="text-text-secondary">We only share data with trusted service providers (like cloud hosting) bound by strict confidentiality agreements, or when required by law.</p>
+                    </div>
+                    <div class="bg-surface rounded-2xl p-8 shadow-cosmic">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-r from-accent to-success flex items-center justify-center font-bold">5</div>
+                            <h3 class="font-clash text-xl font-semibold">Data Security & Retention</h3>
+                        </div>
+                         <p class="text-text-secondary">We implement a comprehensive security framework, including encryption and access controls, to safeguard your data. We retain data only for as long as necessary to fulfill its original purpose or comply with legal obligations.</p>
+                    </div>
+                </div>
+
+                <div class="bg-surface rounded-2xl shadow-cosmic overflow-hidden">
+                    <div class="flex items-center gap-6 p-6 bg-secondary border-b border-border-subtle flex-wrap justify-center sm:justify-start">
+                        <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-to-r from-accent to-success flex items-center justify-center text-xl font-bold text-text-primary shadow-cosmic">6</div>
+                        <h3 class="text-2xl font-clash font-semibold text-text-primary text-center sm:text-left">
+                            Your Data Rights
+                        </h3>
+                    </div>
+                    <div class="p-6 md:p-8">
+                        <p class="text-text-secondary text-lg mb-6">You have significant control over your personal data. You have the right to access, correct, delete, or restrict the processing of your information. You can exercise these rights through your account settings or by contacting us directly. You also have the right to withdraw consent at any time and lodge a complaint with a data protection authority.</p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8 p-8 bg-surface rounded-2xl shadow-moderate">
+                    <h3 class="text-3xl font-clash font-bold text-accent mb-4">Contact Us</h3>
+                    <p class="text-lg text-text-secondary mb-6 max-w-2xl mx-auto">
+                        If you have any questions or concerns about this Privacy Policy or your data rights, please reach out to our team.
+                    </p>
+                    <a href="mailto:support@vyomarr.com" class="inline-block bg-accent text-text-primary font-semibold py-3 px-8 rounded-lg hover:opacity-90 transition-opacity duration-200">
+                        support@vyomarr.com
+                    </a>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <div id="footer"></div>
+</body>
+<script src="load.js"></script>
+<script>
+    
+</script>
+</html>

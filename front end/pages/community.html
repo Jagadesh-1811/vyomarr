@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Vyomarr Community</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Include Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration and Custom Styles -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#000B49',
+                        secondary: '#1B1F30',
+                        accent: '#4F46E5',
+                        background: '#0A0A0B',
+                        surface: '#1A1B23',
+                        'text-primary': '#F8FAFC',
+                        'text-secondary': '#94A3B8',
+                        success: '#10B981',
+                        warning: '#F59E0B',
+                        error: '#EF4444'
+                    },
+                    fontFamily: {
+                        'clash': ['Clash Display', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Scroll-based fade-in effect */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Reusable glow and hover effects */
+        .cosmic-glow {
+            box-shadow: 0 4px 20px rgba(79, 70, 229, 0.15);
+        }
+        .cosmic-glow-hover {
+            transition: box-shadow 0.3s ease;
+        }
+        .cosmic-glow-hover:hover {
+            box-shadow: 0 8px 32px rgba(79, 70, 229, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary font-inter min-h-screen">
+    <div id="navbar"></div>
+
+    <!-- Header Section -->
+    
+        <div class="relative z-10 max-w-4xl mx-auto px-6 py-16"><br><br>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-clash font-bold bg-gradient-to-r "><br><br>
+                Join the Vyomarr Community
+          </h1>
+          </div>
+
+    <!-- Main Content -->
+    <main class="relative">
+        <section id="channels" class="py-16 lg:py-24">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-12">
+                    <!-- YouTube Card -->
+                    <div class="bg-surface/50 backdrop-blur-sm border border-text-secondary/20 rounded-lg p-8 cosmic-glow fade-in">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i class="fab fa-youtube text-5xl text-red-500"></i>
+                            <h2 class="text-3xl font-clash font-semibold text-text-primary">YouTube</h2>
+                        </div>
+                        <p class="text-text-secondary mb-4">
+                            For Deep Visual Exploration. If you prefer learning through visuals, animations, and immersive storytelling, Vyomarr's YouTube channel is designed for you.
+                        </p>
+                        <h3 class="text-xl font-clash font-semibold text-accent mb-2">What you'll find:</h3>
+                        <ul class="list-disc list-inside space-y-1 text-text-secondary">
+                            <li>Short-form and long-form "What If..." video explorations</li>
+                            <li>Scientific paradoxes and space theories, visually explained</li>
+                            <li>Thought-provoking content that simplifies complex topics</li>
+                        </ul>
+                        <a href="https://www.youtube.com/@vyomarr" class="mt-6 block text-center bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            subscribe on YouTube
+                        </a>
+                    </div>
+                    
+                    <!-- Instagram Card -->
+                    <div class="bg-surface/50 backdrop-blur-sm border border-text-secondary/20 rounded-lg p-8 cosmic-glow fade-in">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i class="fab fa-instagram text-5xl text-pink-500"></i>
+                            <h2 class="text-3xl font-clash font-semibold text-text-primary">Instagram</h2>
+                        </div>
+                        <p class="text-text-secondary mb-4">
+                            For Quick Insights and Daily Inspiration. If you're looking for fast, creative, and visually engaging content, Vyomarr's Instagram page delivers snapshots of cosmic curiosity straight to your feed.
+                        </p>
+                        <h3 class="text-xl font-clash font-semibold text-accent mb-2">What you'll find:</h3>
+                        <ul class="list-disc list-inside space-y-1 text-text-secondary">
+                            <li>Short theories, facts, and visuals in carousel or reel format</li>
+                            <li>Interactive polls, story Q&As, and behind-the-scenes glimpses</li>
+                            <li>Community prompts and artistic cosmic interpretations</li>
+                        </ul>
+                        <a href="https://www.instagram.com/vyomarr/?igsh=eWdhbDlpc21maGx4#" class="mt-6 block text-center bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            Follow on Instagram
+                        </a>
+                    </div>
+                    
+                    <!-- Discord Card -->
+                    <div class="bg-surface/50 backdrop-blur-sm border border-text-secondary/20 rounded-lg p-8 cosmic-glow fade-in">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i class="fab fa-discord text-5xl text-indigo-400"></i>
+                            <h2 class="text-3xl font-clash font-semibold text-text-primary">Discord</h2>
+                        </div>
+                        <p class="text-text-secondary mb-4">
+                            For Real-Time Collaboration and Community Discussion. If you're interested in engaging directly with the community, Vyomarr's Discord server is the most interactive space.
+                        </p>
+                        <h3 class="text-xl font-clash font-semibold text-accent mb-2">What you'll find:</h3>
+                        <ul class="list-disc list-inside space-y-1 text-text-secondary">
+                            <li>Live theory discussions, brainstorm rooms, and moderated debates</li>
+                            <li>Feedback spaces for submitted theories</li>
+                            <li>Exclusive community events, puzzle challenges, and idea labs</li>
+                        </ul>
+                        <a href="#" class="mt-6 block text-center bg-indigo-400 hover:bg-indigo-500 text-white px-6 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            Join Discord
+                        </a>
+                    </div>
+
+                    <!-- LinkedIn Card -->
+                    <div class="bg-surface/50 backdrop-blur-sm border border-text-secondary/20 rounded-lg p-8 cosmic-glow fade-in">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <i class="fab fa-linkedin text-5xl text-blue-500"></i>
+                            <h2 class="text-3xl font-clash font-semibold text-text-primary">LinkedIn</h2>
+                        </div>
+                        <p class="text-text-secondary mb-4">
+                            For Following the Vision and Founder's Insights. Vyomarr is led by Mohan Reddy Sai Govindu. His LinkedIn profile serves as a place for those who want to understand the bigger picture.
+                        </p>
+                        <h3 class="text-xl font-clash font-semibold text-accent mb-2">What you'll find:</h3>
+                        <ul class="list-disc list-inside space-y-1 text-text-secondary">
+                            <li>Thoughtful posts on space innovation, creativity, and system design</li>
+                            <li>Behind-the-scenes updates on Vyomarr's progress and roadmap</li>
+                            <li>Occasional posts about internships, collaborations, or speaking engagements</li>
+                        </ul>
+                        <a href="https://www.linkedin.com/in/govindumohan/" class="mt-6 block text-center bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            Connect on LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Summary Section -->
+        <section class="py-16 lg:py-24 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 fade-in">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-clash font-bold text-accent mb-8">
+                    Which Community Should You Join?
+                </h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full table-auto text-text-primary border border-text-secondary/20 rounded-xl cosmic-glow-hover">
+                        <thead>
+                            <tr class="bg-surface">
+                                <th class="px-6 py-3 border-b border-text-secondary/20 text-left text-sm font-semibold text-accent uppercase tracking-wider">Your Engagement Style</th>
+                                <th class="px-6 py-3 border-b border-text-secondary/20 text-left text-sm font-semibold text-accent uppercase tracking-wider">Platform to Join</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-surface/50 divide-y divide-text-secondary/20">
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">You learn by watching</td>
+                                <td class="px-6 py-4 whitespace-nowrap">YouTube</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">You enjoy daily micro-content</td>
+                                <td class="px-6 py-4 whitespace-nowrap">Instagram</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">You like live discussions</td>
+                                <td class="px-6 py-4 whitespace-nowrap">Discord</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">You follow mission & leadership</td>
+                                <td class="px-6 py-4 whitespace-nowrap">LinkedIn (Founder's Personal Profile)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-lg text-text-secondary mt-8">
+                    Each Vyomarr platform exists with a specific purpose. You are welcome to follow one, several, or all based on your level of interest and preferred format of engagement.
+                </p>
+                <p class="text-lg text-text-primary mt-4">
+                    If you're ready to begin, start with the one that resonates with how you explore ideas—and join the growing network of people who believe in the power of science and imagination.
+                </p>
+            </div>
+        </section>
+    </main>
+    <div id="footer"></div>
+
+    <script>
+        // Scroll animations
+        function handleScrollAnimations() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            handleScrollAnimations();
+        });
+
+        
+    </script>
+    <script src="load.js"></script>
+</body>
+</html>
