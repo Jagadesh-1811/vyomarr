@@ -1,1 +1,30 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Build outputs
+dist/
+build/
+*.log
+
+# Environment files
 .env
+.env.local
+.env.*.local
+
+# Firebase/Google Cloud credentials
+*firebase*.json
+*-adminsdk-*.json
+serviceAccountKey.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
