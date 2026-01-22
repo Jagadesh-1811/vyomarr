@@ -106,34 +106,44 @@ export default function HomePage() {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
 
-    // Prepare slides from config (normalize data structure)
-    const slides = heroConfig.slides && heroConfig.slides.length > 0
-        ? heroConfig.slides
-        : (heroConfig.heading ? [heroConfig] : []); // Fallback to single edited or empty
-
-    const hasSlides = slides.length > 0;
-
-    // Default fallback if no slides at all
-    const activeSlide = hasSlides ? slides[currentSlideIndex] : {
+    // Default slide (original hero banner)
+    const defaultSlide = {
         heading: null, // Signals to use hardcoded default
         subHeading: null,
         primaryButtonText: "Discover Mysteries",
         primaryButtonLink: "/space-mysteries",
         secondaryButtonText: "Explore What If",
         secondaryButtonLink: "/what-if",
-        backgroundImageUrl: "/assets/images/hero-banner.png"
+        backgroundImageUrl: "/assets/images/hero-banner.png",
+        isDefault: true
     };
 
-    // Auto-scroll effect
+    // Prepare slides from config (normalize data structure)
+    // Include default slide along with any custom slides for rotation
+    const configSlides = heroConfig.slides && heroConfig.slides.length > 0
+        ? heroConfig.slides
+        : (heroConfig.heading ? [heroConfig] : []);
+
+    // Combine: if there are custom slides, add default slide to rotation; otherwise just show default
+    const slides = configSlides.length > 0 
+        ? [...configSlides, defaultSlide] 
+        : [defaultSlide];
+
+    const hasCustomSlides = configSlides.length > 0;
+
+    // Active slide based on current index
+    const activeSlide = slides[currentSlideIndex] || defaultSlide;
+
+    // Auto-scroll effect - always rotate if more than 1 slide
     useEffect(() => {
-        if (!hasSlides || slides.length <= 1 || isHovered) return;
+        if (slides.length <= 1 || isHovered) return;
 
         const interval = setInterval(() => {
             setCurrentSlideIndex(prev => (prev + 1) % slides.length);
-        }, 7000); // 7 seconds per slide
+        }, 12000); // 12 seconds per slide
 
         return () => clearInterval(interval);
-    }, [hasSlides, slides.length, isHovered]);
+    }, [slides.length, isHovered]);
 
     // Manual navigation
     const nextSlide = () => setCurrentSlideIndex(prev => (prev + 1) % slides.length);
@@ -213,29 +223,31 @@ export default function HomePage() {
                                     {activeSlide.subHeading || "Dive into cosmic puzzles, unravel space mysteries, and connect with fellow explorers in the ultimate space discovery platform."}
                                 </p>
 
-                                <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.4s' }}>
-                                    <Link to={activeSlide.primaryButtonLink || "/space-mysteries"} className="btn-primary">
-                                        {activeSlide.primaryButtonText || "Discover Mysteries"}
-                                    </Link>
-                                    <Link to={activeSlide.secondaryButtonLink || "/what-if"} className="btn-secondary">
-                                        {activeSlide.secondaryButtonText || "Explore What If"}
-                                    </Link>
-                                </div>
+                                {activeSlide.isDefault && (
+                                    <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.4s' }}>
+                                        <Link to={activeSlide.primaryButtonLink || "/space-mysteries"} className="btn-primary">
+                                            {activeSlide.primaryButtonText || "Discover Mysteries"}
+                                        </Link>
+                                        <Link to={activeSlide.secondaryButtonLink || "/what-if"} className="btn-secondary">
+                                            {activeSlide.secondaryButtonText || "Explore What If"}
+                                        </Link>
+                                    </div>
+                                )}
                             </div>
 
-                            {/* Carousel Controls */}
-                            {hasSlides && slides.length > 1 && (
+                            {/* Carousel Controls - show when there are multiple slides */}
+                            {slides.length > 1 && (
                                 <>
                                     <button
                                         onClick={prevSlide}
-                                        className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all z-20"
+                                        className="absolute left-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all z-20"
                                         style={{ backdropFilter: 'blur(4px)' }}
                                     >
                                         ❮
                                     </button>
                                     <button
                                         onClick={nextSlide}
-                                        className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all z-20"
+                                        className="absolute right-4 top-1/2 transform -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all z-20"
                                         style={{ backdropFilter: 'blur(4px)' }}
                                     >
                                         ❯
