@@ -2,10 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Backend API connecting MongoDB and Cloudinary",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "start:legacy": "node index.js"
   },
   "dependencies": {
     "cloudinary": "^1.41.0",
@@ -15,6 +16,7 @@
     "mongodb": "^7.0.0",
     "mongoose": "^7.6.3",
     "multer": "^1.4.5-lts.1",
+    "node-cron": "^4.2.1",
     "nodemailer": "^7.0.11",
     "streamifier": "^0.1.1"
   },

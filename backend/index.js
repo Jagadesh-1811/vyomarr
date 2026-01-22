@@ -34,6 +34,10 @@ const connectDB = async () => {
     await mongoose.connect(dbURI);
     console.log('✅ MongoDB Connected Successfully');
     isDBConnected = true;
+
+    // Start the article scheduler after DB connection
+    const { startScheduler } = require('./services/scheduler');
+    startScheduler();
   } catch (err) {
     console.error('❌ MongoDB Connection Error:', err.message);
     console.error('⚠️  Server will continue running, but database operations will fail.');
@@ -301,29 +305,72 @@ app.post('/api/posts/:id/comments', async (req, res) => {
 // Get all comments from all posts (for admin dashboard)
 app.get('/api/comments', async (req, res) => {
   try {
+    const allComments = [];
+
+    // 1. Get legacy BlogPost comments (embedded in posts)
     const posts = await BlogPost.find({ 'comments.0': { $exists: true } })
       .select('title comments')
       .sort({ createdAt: -1 });
-    
-    // Flatten comments with post info
-    const allComments = [];
+
     posts.forEach(post => {
       post.comments.forEach(comment => {
         allComments.push({
           _id: comment._id,
           postId: post._id,
-          articleTitle: post.title,
+          postType: 'article',
+          articleTitle: post.title || 'Untitled Article',
           name: comment.name,
           text: comment.text,
           createdAt: comment.createdAt
         });
       });
     });
-    
+
+    // 2. Get new Comment model comments (from SpaceMystery, WhatIf, etc.)
+    const Comment = require('./models/Comment');
+    const SpaceMystery = require('./models/SpaceMystery');
+
+    const newComments = await Comment.find().sort({ createdAt: -1 });
+
+    // Fetch article titles for each comment
+    for (const comment of newComments) {
+      let articleTitle = 'Unknown Article';
+
+      if (comment.postType === 'mystery' || comment.postType === 'article') {
+        // Try SpaceMystery first
+        const mystery = await SpaceMystery.findById(comment.postId).select('title');
+        if (mystery) {
+          articleTitle = mystery.title;
+        } else {
+          // Try BlogPost
+          const blogPost = await BlogPost.findById(comment.postId).select('title');
+          if (blogPost) {
+            articleTitle = blogPost.title;
+          }
+        }
+      } else if (comment.postType === 'whatif') {
+        const whatif = await WhatIf.findById(comment.postId).select('title');
+        if (whatif) {
+          articleTitle = whatif.title;
+        }
+      }
+
+      allComments.push({
+        _id: comment._id,
+        postId: comment.postId,
+        postType: comment.postType,
+        articleTitle: articleTitle,
+        name: comment.authorName || 'Anonymous',
+        text: comment.text,
+        createdAt: comment.createdAt
+      });
+    }
+
     // Sort by date, newest first
     allComments.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-    
-    res.json(allComments);
+
+    // Wrap in data property for frontend compatibility
+    res.json({ success: true, data: allComments });
   } catch (error) {
     console.error('Error fetching comments:', error);
     res.status(500).json({ error: 'Could not fetch comments' });
@@ -334,13 +381,13 @@ app.get('/api/comments', async (req, res) => {
 app.delete('/api/posts/:postId/comments/:commentId', async (req, res) => {
   try {
     const { postId, commentId } = req.params;
-    
+
     const post = await BlogPost.findByIdAndUpdate(
       postId,
       { $pull: { comments: { _id: commentId } } },
       { new: true }
     );
-    
+
     if (!post) return res.status(404).json({ error: 'Post not found' });
     res.json({ success: true, message: 'Comment deleted' });
   } catch (error) {
@@ -355,7 +402,7 @@ app.delete('/api/posts/:postId/comments/:commentId', async (req, res) => {
 app.post('/api/feedback', async (req, res) => {
   try {
     const { name, email, userType, overallRating, feedbackAreas, likes, improvements, features } = req.body;
-    
+
     if (!name || !email) {
       return res.status(400).json({ error: 'Name and email are required' });
     }
@@ -436,7 +483,7 @@ app.delete('/api/feedback/:id', async (req, res) => {
 app.post('/api/subscribe', async (req, res) => {
   try {
     const { email } = req.body;
-    
+
     if (!email) {
       return res.status(400).json({ error: 'Email is required' });
     }
@@ -631,7 +678,7 @@ app.patch('/api/admin/whatif/:id/approve', async (req, res) => {
 app.patch('/api/admin/whatif/:id/reject', async (req, res) => {
   try {
     const { reason } = req.body;
-    
+
     const theory = await WhatIf.findByIdAndUpdate(
       req.params.id,
       { status: 'rejected', reviewedAt: new Date(), rejectionReason: reason || 'No reason provided' },
@@ -690,6 +737,151 @@ app.delete('/api/admin/whatif/:id', async (req, res) => {
     res.status(500).json({ error: 'Could not delete theory' });
   }
 });
+
+// ============ CONTACT ROUTES ============
+
+// Contact Schema
+const ContactSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true },
+  subject: { type: String, required: true },
+  message: { type: String, required: true },
+  status: { type: String, enum: ['new', 'read', 'replied', 'resolved'], default: 'new' },
+  adminNotes: { type: String },
+  repliedAt: { type: Date },
+  createdAt: { type: Date, default: Date.now },
+});
+
+const Contact = mongoose.model('Contact', ContactSchema);
+
+// Submit a new contact message (public)
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+
+    if (!name || !email || !subject || !message) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    const newContact = new Contact({
+      name,
+      email: email.toLowerCase(),
+      subject,
+      message,
+      status: 'new'
+    });
+
+    await newContact.save();
+
+    // Send confirmation email to user
+    const emailHtml = `
+      <div style="font-family: 'Lato', sans-serif; max-width: 600px; margin: 0 auto; background: #000b49; padding: 40px; border-radius: 16px;">
+        <h1 style="color: #fc4c00; font-size: 28px; margin-bottom: 20px;">Thank you for reaching out!</h1>
+        <p style="color: #f8f9f9; font-size: 16px; line-height: 1.6;">Hi ${name},</p>
+        <p style="color: #bfc3c6; font-size: 16px; line-height: 1.6;">
+          We have received your message regarding "<strong style="color: #f8f9f9;">${subject}</strong>". 
+          Our team will review it and get back to you within 24-48 hours.
+        </p>
+        <p style="color: #bfc3c6; font-size: 14px; margin-top: 30px;">
+          Best regards,<br/>
+          <strong style="color: #fc4c00;">The Vyomarr Team</strong>
+        </p>
+      </div>
+    `;
+    await sendEmail(email, 'We received your message - Vyomarr', emailHtml);
+
+    res.status(201).json({
+      success: true,
+      message: 'Your message has been sent successfully!',
+      data: newContact
+    });
+  } catch (error) {
+    console.error('Error submitting contact:', error);
+    res.status(500).json({ error: 'Server Error during contact submission' });
+  }
+});
+
+// Get all contact messages (admin)
+app.get('/api/contact', async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+    res.json(contacts);
+  } catch (error) {
+    res.status(500).json({ error: 'Could not fetch contacts' });
+  }
+});
+
+// Get contact statistics (admin)
+app.get('/api/contact/stats', async (req, res) => {
+  try {
+    const total = await Contact.countDocuments();
+    const newCount = await Contact.countDocuments({ status: 'new' });
+    const readCount = await Contact.countDocuments({ status: 'read' });
+    const repliedCount = await Contact.countDocuments({ status: 'replied' });
+    const resolvedCount = await Contact.countDocuments({ status: 'resolved' });
+
+    res.json({
+      total,
+      new: newCount,
+      read: readCount,
+      replied: repliedCount,
+      resolved: resolvedCount
+    });
+  } catch (error) {
+    res.status(500).json({ error: 'Could not fetch contact statistics' });
+  }
+});
+
+// Get single contact by ID (admin)
+app.get('/api/contact/:id', async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+    if (!contact) return res.status(404).json({ error: 'Contact not found' });
+    res.json(contact);
+  } catch (error) {
+    res.status(500).json({ error: 'Could not fetch contact' });
+  }
+});
+
+// Update contact status (admin)
+app.put('/api/contact/:id', async (req, res) => {
+  try {
+    const { status, adminNotes } = req.body;
+
+    const updateData = { status };
+    if (adminNotes !== undefined) updateData.adminNotes = adminNotes;
+    if (status === 'replied') updateData.repliedAt = new Date();
+
+    const contact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      updateData,
+      { new: true }
+    );
+
+    if (!contact) return res.status(404).json({ error: 'Contact not found' });
+    res.json({ success: true, data: contact });
+  } catch (error) {
+    res.status(500).json({ error: 'Could not update contact' });
+  }
+});
+
+// Delete contact message (admin)
+app.delete('/api/contact/:id', async (req, res) => {
+  try {
+    const contact = await Contact.findByIdAndDelete(req.params.id);
+    if (!contact) return res.status(404).json({ error: 'Contact not found' });
+    res.json({ success: true, message: 'Contact deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Could not delete contact' });
+  }
+});
+
+// ============ SPACE MYSTERIES ROUTES ============
+const spaceMysteryRoutes = require('./routes/spaceMysteryRoutes');
+app.use('/api/spacemysteries', spaceMysteryRoutes);
+
+const siteConfigRoutes = require('./routes/siteConfigRoutes');
+app.use('/api/config', siteConfigRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
