@@ -1,5 +1,9 @@
-const express = require('express');
-const path = require('path');
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -8,7 +12,8 @@ const PORT = process.env.PORT || 3001;
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Handle ALL routes - serve index.html for SPA
-app.get('*', (req, res) => {
+// Using regex pattern instead of wildcard for newer express versions
+app.get('/{*path}', (req, res) => {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
