@@ -3,12 +3,28 @@ import { useState, useEffect } from 'react'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
+const USER_COOKIE_CONSENT_KEY = 'vyomarr_user_cookie_consent';
+
 export default function HomePage() {
     const [spaceMysteries, setSpaceMysteries] = useState([])
     const [whatIfScenarios, setWhatIfScenarios] = useState([])
     const [recentSubmissions, setRecentSubmissions] = useState([])
     const [loading, setLoading] = useState(true)
     const [heroConfig, setHeroConfig] = useState({})
+    const [showCookieConsent, setShowCookieConsent] = useState(false)
+
+    useEffect(() => {
+        // Check cookie consent
+        const consent = localStorage.getItem(USER_COOKIE_CONSENT_KEY);
+        if (!consent) {
+            setShowCookieConsent(true);
+        }
+    }, [])
+
+    const handleAcceptCookies = () => {
+        localStorage.setItem(USER_COOKIE_CONSENT_KEY, 'true');
+        setShowCookieConsent(false);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -125,8 +141,8 @@ export default function HomePage() {
         : (heroConfig.heading ? [heroConfig] : []);
 
     // Combine: if there are custom slides, add default slide to rotation; otherwise just show default
-    const slides = configSlides.length > 0 
-        ? [...configSlides, defaultSlide] 
+    const slides = configSlides.length > 0
+        ? [...configSlides, defaultSlide]
         : [defaultSlide];
 
     const hasCustomSlides = configSlides.length > 0;
@@ -501,20 +517,20 @@ export default function HomePage() {
 
                 <div className="crew-grid">
                     <div className="crew-card discovery-card">
-                        <div className="crew-avatar crew-icon">
-                            VT
+                        <div className="crew-avatar">
+                            <img src="https://res.cloudinary.com/dhcmnap44/image/upload/v1769275452/gm_julxqn.jpg" alt="G Mohan Reddy Sai" />
                         </div>
-                        <h4>Content Team</h4>
-                        <p className="role">Research & Writing</p>
-                        <p className="crew-desc">Creating engaging content about cosmic mysteries and space science.</p>
+                        <h4>G Mohan Reddy Sai</h4>
+                        <p className="role">Founder & Content Head</p>
+                        <p className="crew-desc">Visionary leader shaping Vyomarr's cosmic journey with passion and purpose.</p>
                         <div className="social-links">
-                            <a href="mailto:content@vyomarr.com" className="social-icon" title="Email">
+                            <a href="mailto:mohanreddysaigovindu@gmail.com" className="social-icon" title="Email">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                     <polyline points="22,6 12,13 2,6" />
                                 </svg>
                             </a>
-                            <a href="https://linkedin.com/company/vyomarr" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
+                            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                                 </svg>
@@ -522,41 +538,20 @@ export default function HomePage() {
                         </div>
                     </div>
                     <div className="crew-card discovery-card">
-                        <div className="crew-avatar crew-icon">
-                            <img src="" alt="" />
+                        <div className="crew-avatar">
+                            <img src="https://res.cloudinary.com/dhcmnap44/image/upload/v1769275844/jafsd_na0lo9.jpg" alt="C V Jagadeeshwar" />
                         </div>
-                        <h4>Development Team</h4>
-                        <p className="role">FULL STACK DEVELOPER</p>
-                        <p className="crew-desc">Building the platform to bring space exploration to your screen.</p>
+                        <h4>C V Jagadeeshwar</h4>
+                        <p className="role">Full Stack Developer</p>
+                        <p className="crew-desc">Tech architect building seamless experiences that bring the universe closer.</p>
                         <div className="social-links">
-                            <a href="mailto:dev@vyomarr.com" className="social-icon" title="Email">
+                            <a href="mailto:jagadeshwar2014@gmail.com" className="social-icon" title="Email">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                                     <polyline points="22,6 12,13 2,6" />
                                 </svg>
                             </a>
-                            <a href="https://linkedin.com/company/vyomarr" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div className="crew-card discovery-card">
-                        <div className="crew-avatar crew-icon">
-                            VT
-                        </div>
-                        <h4>Design Team</h4>
-                        <p className="role">Visual Experience</p>
-                        <p className="crew-desc">Crafting beautiful, immersive experiences for our community.</p>
-                        <div className="social-links">
-                            <a href="mailto:design@vyomarr.com" className="social-icon" title="Email">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                    <polyline points="22,6 12,13 2,6" />
-                                </svg>
-                            </a>
-                            <a href="https://linkedin.com/company/vyomarr" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
+                            <a href="www.linkedin.com/in/jagadeeshwar-c-v-018548316" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                                 </svg>
@@ -593,8 +588,9 @@ export default function HomePage() {
 
                 /* Crew Section Styles */
                 .crew-grid {
-                    display: grid;
-                    grid-template-columns: repeat(3, 1fr);
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
                     gap: 32px;
                     max-width: 900px;
                     margin: 0 auto;
@@ -604,6 +600,12 @@ export default function HomePage() {
                 .crew-card {
                     text-align: center;
                     padding: 32px 24px;
+                    width: 280px;
+                    min-height: 280px;
+                    flex-shrink: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
                 }
 
                 .crew-avatar {
@@ -614,6 +616,12 @@ export default function HomePage() {
                     background: rgba(255, 255, 255, 0.05);
                     border: 2px solid var(--color-space-orange);
                     overflow: hidden;
+                }
+
+                .crew-avatar img {
+                    width: 150%;
+                    height: 150%;
+                    object-fit: cover;
                 }
 
                 .crew-avatar.crew-icon {
@@ -686,6 +694,97 @@ export default function HomePage() {
                     }
                 }
             `}</style>
+            {showCookieConsent && (
+                <div style={{
+                    position: 'fixed',
+                    bottom: '40px',
+                    right: '40px',
+                    width: '400px',
+                    maxWidth: '90vw',
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    backdropFilter: 'blur(20px)',
+                    webkitBackdropFilter: 'blur(20px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: '24px',
+                    padding: '32px',
+                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05)',
+                    zIndex: 9999,
+                    animation: 'slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+                }}>
+                    <div style={{
+                        height: '4px',
+                        width: '60px',
+                        background: 'rgba(252, 76, 0, 0.5)',
+                        borderRadius: '2px',
+                        marginBottom: '24px'
+                    }} />
+
+                    <h3 style={{
+                        margin: '0 0 12px',
+                        color: '#fff',
+                        fontSize: '24px',
+                        fontWeight: '700',
+                        letterSpacing: '-0.02em',
+                        background: 'linear-gradient(to right, #fff, #94a3b8)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent'
+                    }}>
+                        Cookies & Privacy
+                    </h3>
+
+                    <p style={{
+                        margin: '0 0 24px',
+                        color: '#cbd5e1',
+                        fontSize: '15px',
+                        lineHeight: '1.6',
+                        opacity: 0.9
+                    }}>
+                        We use secure authentication cookies to keep you signed in and ensure a seamless cosmic experience. These are essential for the dashboard and mission control features.
+                    </p>
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <button
+                            onClick={handleAcceptCookies}
+                            style={{
+                                width: '100%',
+                                padding: '16px',
+                                background: 'linear-gradient(135deg, #fc4c00, #ff6a2b)',
+                                color: '#fff',
+                                border: 'none',
+                                borderRadius: '16px',
+                                fontSize: '16px',
+                                fontWeight: '700',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s',
+                                boxShadow: '0 8px 20px rgba(252, 76, 0, 0.3)'
+                            }}
+                            onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+                            onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+                        >
+                            Accept All Cookies
+                        </button>
+                        <button
+                            onClick={() => setShowCookieConsent(false)}
+                            style={{
+                                width: '100%',
+                                padding: '16px',
+                                background: 'rgba(255,255,255,0.05)',
+                                color: '#fff',
+                                border: '1px solid rgba(255,255,255,0.1)',
+                                borderRadius: '16px',
+                                fontSize: '15px',
+                                fontWeight: '600',
+                                cursor: 'pointer',
+                                transition: 'all 0.2s'
+                            }}
+                            onMouseEnter={(e) => e.target.style.background = 'rgba(255,255,255,0.1)'}
+                            onMouseLeave={(e) => e.target.style.background = 'rgba(255,255,255,0.05)'}
+                        >
+                            Necessary Only
+                        </button>
+                    </div>
+                </div>
+            )}
         </>
     )
 }

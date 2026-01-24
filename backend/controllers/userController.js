@@ -46,9 +46,24 @@ const authenticateUser = async (req, res) => {
     // Populate publications
     await user.populate('publications');
 
+    // Generate JWT for normal user
+    const jwt = require('jsonwebtoken'); // Ensure this is available
+    const token = jwt.sign({ id: user._id, firebaseUid: user.firebaseUid }, process.env.JWT_SECRET, {
+      expiresIn: '30d',
+    });
+
+    // Send token in HTTP-only cookie
+    res.cookie('userToken', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    });
+
     res.status(200).json({
       success: true,
-      data: user
+      data: user,
+      token // Optional: return token in body if needed for client storage
     });
   } catch (error) {
     console.error('Auth error:', error);

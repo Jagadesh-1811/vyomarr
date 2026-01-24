@@ -105,6 +105,7 @@ export default function Footer() {
               <li><Link to="/issues">Account & Login Issues</Link></li>
               <li><Link to="/guidelines">Content Guidelines</Link></li>
               <li><Link to="/privacy">Privacy & Data Policy</Link></li>
+              <li><Link to="/cookies">Cookies Policy</Link></li>
             </ul>
           </div>
 

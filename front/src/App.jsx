@@ -17,6 +17,7 @@ import PrivacyPage from './pages/PrivacyPage'
 import GuidelinesPage from './pages/GuidelinesPage'
 import IssuesPage from './pages/IssuesPage'
 import HowToSubmitPage from './pages/HowToSubmitPage'
+import CookiesPage from './pages/CookiesPage'
 
 // Admin Panel Components
 import AdminLogin from './admin/Login'
@@ -51,6 +52,7 @@ function App() {
                 <Route path="guidelines" element={<GuidelinesPage />} />
                 <Route path="issues" element={<IssuesPage />} />
                 <Route path="how-to-submit" element={<HowToSubmitPage />} />
+                <Route path="cookies" element={<CookiesPage />} />
             </Route>
         </Routes>
     )

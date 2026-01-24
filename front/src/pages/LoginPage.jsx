@@ -1,6 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import axios from 'axios'
+
+// Configure axios base URL locally or move to a global config file later
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+axios.defaults.withCredentials = true; // IMPORTANT for cookies
+
+
 
 export default function LoginPage() {
   const [isLogin, setIsLogin] = useState(true)
@@ -13,6 +20,7 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
+
 
   const { login, register, loginWithGoogle, resetPassword } = useAuth()
   const navigate = useNavigate()
@@ -27,12 +35,28 @@ export default function LoginPage() {
     const timer = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % slideImages.length)
     }, 5000)
+
     return () => clearInterval(timer)
   }, [])
 
+
+
+  // Helper to sync with backend and get JWT cookie
+  const syncBackendSession = async (user) => {
+    try {
+      await axios.post('/api/users/auth', {
+        firebaseUid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL
+      });
+    } catch (err) {
+      console.error("Backend auth sync failed:", err);
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    // Skip terms check for forgot password flow
     if (!isForgot && !termsAccepted) {
       setError('Please accept the terms and conditions')
       return
@@ -47,13 +71,15 @@ export default function LoginPage() {
         setIsForgot(false)
         setIsLogin(true)
         setLoading(false)
-        return // Don't navigate after password reset
+        return
       } else if (isLogin) {
-        await login(email, password)
+        const result = await login(email, password)
+        await syncBackendSession(result.user)
       } else {
-        await register(email, password, displayName)
+        const result = await register(email, password, displayName)
+        await syncBackendSession(result.user)
       }
-      navigate('/dashboard')
+      navigate('/')
     } catch (err) {
       setError(err.message)
     } finally {
@@ -69,16 +95,15 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
     try {
-      await loginWithGoogle()
-      navigate('/dashboard')
+      const result = await loginWithGoogle()
+      await syncBackendSession(result.user)
+      navigate('/')
     } catch (err) {
       setError(err.message)
     } finally {
       setLoading(false)
     }
   }
-
-
 
   return (
     <>
@@ -108,15 +133,12 @@ export default function LoginPage() {
 
             <div className="form-container">
               {isForgot ? (
-                /* Forgot Password Form */
                 <div className="form-content">
                   <div className="form-header">
                     <h1>Reset Password</h1>
                     <p>Enter your email to receive a reset link</p>
                   </div>
-
                   {error && <div className="error-message">{error}</div>}
-
                   <form onSubmit={handleSubmit}>
                     <input
                       type="email"
@@ -125,26 +147,21 @@ export default function LoginPage() {
                       placeholder="Enter your registered email"
                       required
                     />
-
                     <button type="submit" className="btn-submit" disabled={loading}>
                       {loading ? 'Sending...' : 'Send Reset Link'} 🚀
                     </button>
-
                     <p className="toggle-form">
                       Remembered it? <button type="button" onClick={() => { setIsForgot(false); setIsLogin(true); }}>Login</button>
                     </p>
                   </form>
                 </div>
               ) : isLogin ? (
-                /* Login Form */
                 <div className="form-content">
                   <div className="form-header">
                     <h1>Ready for Liftoff? Log In to Proceed</h1>
                     <p>Enter your credentials to continue your journey</p>
                   </div>
-
                   {error && <div className="error-message">{error}</div>}
-
                   <form onSubmit={handleSubmit}>
                     <input
                       type="email"
@@ -165,15 +182,12 @@ export default function LoginPage() {
                         {showPassword ? '👁️' : '👁️‍🗨️'}
                       </button>
                     </div>
-
                     <div className="forgot-link">
                       <button type="button" onClick={() => { setIsLogin(false); setIsForgot(true); }} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#3b82f6', textDecoration: 'underline', fontSize: '0.75rem', fontWeight: '700' }}>
                         Forgot your password? Recover it
                       </button>
                     </div>
-
                     <p className="social-hint">One-tap access with Google</p>
-
                     <div className="social-buttons">
                       <button type="button" className="social-btn google" onClick={handleGoogleLogin} disabled={loading}>
                         <svg width="20" height="20" viewBox="0 0 24 24">
@@ -185,31 +199,25 @@ export default function LoginPage() {
                         Google
                       </button>
                     </div>
-
                     <label className="terms-checkbox">
                       <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} required />
                       <span>I agree to the <Link to="/terms">Terms of Service</Link>, <Link to="/guidelines">Content Guidelines</Link>, and <Link to="/policy">Privacy Policy</Link></span>
                     </label>
-
                     <button type="submit" className="btn-submit" disabled={loading}>
                       {loading ? 'Processing...' : 'Proceed'} 🚀
                     </button>
-
                     <p className="toggle-form">
                       New here? <button type="button" onClick={() => setIsLogin(false)}>Create an account</button>
                     </p>
                   </form>
                 </div>
               ) : (
-                /* Register Form */
                 <div className="form-content">
                   <div className="form-header">
                     <h1>Join Us</h1>
                     <p>Begin your cosmic journey</p>
                   </div>
-
                   {error && <div className="error-message">{error}</div>}
-
                   <form onSubmit={handleSubmit}>
                     <input
                       type="text"
@@ -238,16 +246,13 @@ export default function LoginPage() {
                         {showPassword ? '👁️' : '👁️‍🗨️'}
                       </button>
                     </div>
-
                     <label className="terms-checkbox">
                       <input type="checkbox" checked={termsAccepted} onChange={(e) => setTermsAccepted(e.target.checked)} required />
                       <span>I agree to the <Link to="/terms">Terms of Service</Link>, <Link to="/guidelines">Content Guidelines</Link>, and <Link to="/policy">Privacy Policy</Link></span>
                     </label>
-
                     <button type="submit" className="btn-submit" disabled={loading}>
                       {loading ? 'Creating...' : 'Create Account'}
                     </button>
-
                     <p className="toggle-form">
                       Already have an account? <button type="button" onClick={() => setIsLogin(true)}>Login</button>
                     </p>
@@ -256,7 +261,6 @@ export default function LoginPage() {
               )}
             </div>
 
-            {/* Social Footer */}
             <div className="social-footer">
               <span>Follow us on:</span>
               <div className="social-icons">
@@ -277,6 +281,8 @@ export default function LoginPage() {
           </div>
         </main>
       </div>
+
+
 
       <style>{`
                 .login-page {
@@ -521,8 +527,6 @@ export default function LoginPage() {
 
                 .social-btn.google:hover { background: rgba(255, 255, 255, 0.2); }
 
-
-
                 .terms-checkbox {
                     display: flex;
                     align-items: flex-start;
@@ -541,8 +545,9 @@ export default function LoginPage() {
                     font-size: 0.75rem;
                     color: var(--color-mist-gray);
                     line-height: 1.4;
+                    color: #fff;
                 }
-
+                
                 .terms-checkbox a {
                     color: var(--color-space-orange);
                 }
@@ -611,6 +616,11 @@ export default function LoginPage() {
                 .social-icons a:hover { color: var(--color-space-orange); }
 
                 .social-icons svg { width: 18px; height: 18px; }
+
+                @keyframes slideUp {
+                    from { opacity: 0; transform: translateY(50px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
             `}</style>
     </>
   )
