@@ -9,7 +9,7 @@ connectDB();
 const seedAdmin = async () => {
     try {
         const adminEmail = 'mohanreddysaigovindu@gmail.com';
-        const adminPassword = 'admin-mohan@1234567890';
+        const adminPassword = process.env.ADMIN_PASSWORD || 'admin-mohan@1234567890';
 
         // Check if admin already exists
         const exists = await SuperAdmin.findOne({ email: adminEmail });
