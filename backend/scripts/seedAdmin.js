@@ -9,7 +9,12 @@ connectDB();
 const seedAdmin = async () => {
     try {
         const adminEmail = 'mohanreddysaigovindu@gmail.com';
-        const adminPassword = process.env.ADMIN_PASSWORD || 'admin-mohan@1234567890';
+        const adminPassword = process.env.ADMIN_PASSWORD;
+
+        if (!adminPassword) {
+            console.error('❌ Error: ADMIN_PASSWORD environment variable is required.');
+            process.exit(1);
+        }
 
         // Check if admin already exists
         const exists = await SuperAdmin.findOne({ email: adminEmail });
