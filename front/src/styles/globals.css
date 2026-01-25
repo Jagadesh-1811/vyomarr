@@ -329,13 +329,39 @@
   box-sizing: border-box;
 }
 
+html {
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
 body {
   background-color: var(--color-deep-space);
   color: var(--color-cosmic-white);
   font-family: var(--font-body);
   margin: 0;
+  padding: 0;
+  width: 100%;
   overflow-x: hidden;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent images and media from breaking layout */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Ensure all containers respect viewport width */
+#root {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 h1,
@@ -399,8 +425,9 @@ section {
 /* Container */
 .container {
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(16px, 3vw, 24px);
 }
 
 /* ======= GLASSMORPHIC CARDS ======= */
@@ -457,14 +484,18 @@ section {
   font-weight: 600;
   box-shadow: none;
   border: none;
-  padding: 14px 32px;
+  padding: clamp(12px, 2vw, 14px) clamp(24px, 4vw, 32px);
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  min-height: 44px;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  white-space: nowrap;
 }
 
 .btn-primary:hover {
@@ -478,14 +509,18 @@ section {
   background: transparent;
   font-family: var(--font-heading);
   font-weight: 600;
-  padding: 14px 32px;
+  padding: clamp(12px, 2vw, 14px) clamp(24px, 4vw, 32px);
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  min-height: 44px;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  white-space: nowrap;
 }
 
 .btn-secondary:hover {
@@ -613,20 +648,22 @@ section {
 /* ======= GRIDS ======= */
 .discoveries-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 60px;
+  padding: 0 clamp(16px, 5vw, 60px);
+  width: 100%;
 }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 24px;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(16px, 3vw, 24px);
+  width: 100%;
 }
 
 /* ======= HERO SECTION ======= */

@@ -64,8 +64,10 @@ export default function ArticlePage() {
         // Transform data to common format
         const heroImageUrl = data.imageUrl || 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?q=80&w=1920';
 
-        // Filter out hero image from content images avoid repetition
-        const contentImages = (data.images || []).filter(img => img.url !== data.imageUrl && img.url !== heroImageUrl);
+        // Filter out hero image from content images and only include images with descriptions
+        const contentImages = (data.images || [])
+          .filter(img => img.url !== data.imageUrl && img.url !== heroImageUrl)
+          .filter(img => img.description && img.description.trim() !== '');
 
         const transformedArticle = {
           id: data._id,
@@ -1082,9 +1084,7 @@ export default function ArticlePage() {
           line-height: 1.6;
         }
 
-        .article-body .inline-figure figcaption::before {
-          content: '📷 ';
-        }
+
 
         /* Style for legacy backend-inserted images */
         .article-inserted-image {
