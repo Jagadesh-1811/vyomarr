@@ -62,6 +62,11 @@ export default function ArticlePage() {
         const data = await response.json()
 
         // Transform data to common format
+        const heroImageUrl = data.imageUrl || 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?q=80&w=1920';
+
+        // Filter out hero image from content images avoid repetition
+        const contentImages = (data.images || []).filter(img => img.url !== data.imageUrl && img.url !== heroImageUrl);
+
         const transformedArticle = {
           id: data._id,
           title: data.title,
@@ -76,15 +81,15 @@ export default function ArticlePage() {
           date: getRelativeTime(data.createdAt),
           readTime: data.readTime || '5 min read',
           views: '0 views',
-          heroImage: data.imageUrl || 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?q=80&w=1920',
+          heroImage: heroImageUrl,
           heroCaption: `Exploring: ${data.title}`,
           tags: [
             { name: data.category || 'Space', color: 'orange' }
           ],
           votes: data.votes || 0,
           type: contentType,
-          // Include gallery images from backend
-          images: data.images || [],
+          // Include gallery images from backend (filtered)
+          images: contentImages,
           // Include YouTube embed if available
           youtubeEmbed: data.youtubeEmbed || null
         }
@@ -517,9 +522,20 @@ export default function ArticlePage() {
 
                   // Check if content contains HTML tags (from rich text editor)
                   const isHtmlContent = /<[a-z][\s\S]*>/i.test(content);
+                  // Check if content already has images embedded (legacy backend behavior or user added in rich text)
+                  const hasEmbeddedImages = /<img/i.test(content);
 
                   // If content is HTML (from rich text editor), render it with images distributed
                   if (isHtmlContent) {
+                    // If images are already embedded, do not try to inject them again to avoid duplicates
+                    if (hasEmbeddedImages) {
+                      return (
+                        <div className="rich-text-content">
+                          <div dangerouslySetInnerHTML={{ __html: content }} />
+                        </div>
+                      );
+                    }
+
                     // Strip HTML to get plain text for word counting
                     const plainText = content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
                     const totalWords = plainText.split(/\s+/).length;
@@ -1068,6 +1084,16 @@ export default function ArticlePage() {
 
         .article-body .inline-figure figcaption::before {
           content: '📷 ';
+        }
+
+        /* Style for legacy backend-inserted images */
+        .article-inserted-image {
+          max-width: 100%;
+          border-radius: 16px;
+          margin: 32px auto;
+          display: block;
+          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Rich Text Content Styling (from ReactQuill/HTML editor) */

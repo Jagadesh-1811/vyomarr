@@ -65,9 +65,8 @@ const createMystery = async (req, res) => {
             // If date is in the past, just publish immediately
         }
 
-        // Insert images into the description at word‑based positions
-        const imageUrls = images.map(img => img.url);
-        const finalDescription = insertImages(description, imageUrls);
+        // Use the description as provided, relying on frontend or rich text editor for placement
+        const finalDescription = description;
         const newMystery = new SpaceMystery({
             title,
             category,

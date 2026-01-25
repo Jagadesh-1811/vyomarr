@@ -40,13 +40,14 @@ export default function HomePage() {
                 let fetchedMysteries = []
                 let fetchedWhatIf = []
 
-                // Fetch and Sort Space Mysteries (Trending by Views)
+                // Fetch Space Mysteries (Already sorted by createdAt desc from backend, or we ensure it here)
                 const mysteriesRes = await fetch(`${API_URL}/api/spacemysteries`)
                 if (mysteriesRes.ok) {
                     fetchedMysteries = await mysteriesRes.json()
-                    // Sort by views descending (Trending)
-                    const trendingMysteries = [...fetchedMysteries].sort((a, b) => (b.views || 0) - (a.views || 0))
-                    setSpaceMysteries(trendingMysteries.slice(0, 4))
+                    // Use the latest mysteries directly (backend sorts by createdAt desc)
+                    // If we want to ensure latest:
+                    const latestMysteries = [...fetchedMysteries].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                    setSpaceMysteries(latestMysteries.slice(0, 4))
                 }
 
                 // Fetch and Sort What If scenarios (Popular by Votes)
@@ -58,6 +59,14 @@ export default function HomePage() {
                     setWhatIfScenarios(popularWhatIf.slice(0, 4))
                 }
 
+                // Helper to strip HTML tags
+                const stripHtml = (html) => {
+                    if (!html) return '';
+                    const tmp = document.createElement("DIV");
+                    tmp.innerHTML = html;
+                    return tmp.textContent || tmp.innerText || "";
+                }
+
                 // Combine for recent submissions (latest from both)
                 const allSubmissions = []
 
@@ -66,7 +75,7 @@ export default function HomePage() {
                     allSubmissions.push({
                         id: m._id,
                         title: m.title,
-                        description: m.description,
+                        description: stripHtml(m.description),
                         author: m.author || 'Vyomarr Team',
                         createdAt: m.createdAt,
                         type: 'mystery',
@@ -79,7 +88,7 @@ export default function HomePage() {
                     allSubmissions.push({
                         id: w._id,
                         title: w.title,
-                        description: w.description,
+                        description: stripHtml(w.description),
                         author: w.authorName || 'Anonymous',
                         createdAt: w.createdAt,
                         type: 'whatif',
