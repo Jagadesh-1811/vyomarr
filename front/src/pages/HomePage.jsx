@@ -59,13 +59,7 @@ export default function HomePage() {
                     setWhatIfScenarios(popularWhatIf.slice(0, 4))
                 }
 
-                // Helper to strip HTML tags
-                const stripHtml = (html) => {
-                    if (!html) return '';
-                    const tmp = document.createElement("DIV");
-                    tmp.innerHTML = html;
-                    return tmp.textContent || tmp.innerText || "";
-                }
+
 
                 // Combine for recent submissions (latest from both)
                 const allSubmissions = []
@@ -114,6 +108,14 @@ export default function HomePage() {
     }, [])
 
     // Helper function for relative time
+    // Helper function to strip HTML tags
+    const stripHtml = (html) => {
+        if (!html) return '';
+        const tmp = document.createElement("DIV");
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || "";
+    }
+
     const getRelativeTime = (dateString) => {
         if (!dateString) return ''
         const date = new Date(dateString)
@@ -325,7 +327,7 @@ export default function HomePage() {
                                     <img src={getImageUrl(mystery)} alt={mystery.title} />
                                     <div className="card-category">{mystery.categoryLabel || mystery.category || 'MYSTERY'}</div>
                                     <h3>{mystery.title}</h3>
-                                    <p>{mystery.description?.substring(0, 100)}...</p>
+                                    <p>{stripHtml(mystery.description)?.substring(0, 100)}...</p>
                                     <div className="card-meta">
                                         <span>{mystery.views || 0} views</span>
                                         <span>{mystery.readTime || '5 min read'}</span>
@@ -369,7 +371,7 @@ export default function HomePage() {
                                     <img src={getImageUrl(scenario)} alt={scenario.title} />
                                     <div className="card-category">{scenario.category || 'WHAT IF'}</div>
                                     <h3>{scenario.title}</h3>
-                                    <p>{scenario.description?.substring(0, 100)}...</p>
+                                    <p>{stripHtml(scenario.description)?.substring(0, 100)}...</p>
                                     <div className="card-meta">
                                         <span>{scenario.authorName || 'Anonymous'}</span>
                                         <span>{scenario.views || 0} views</span>
@@ -539,7 +541,7 @@ export default function HomePage() {
                                     <polyline points="22,6 12,13 2,6" />
                                 </svg>
                             </a>
-                            <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
+                            <a href="https://www.linkedin.com/in/govindumohan/" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                                 </svg>
@@ -560,7 +562,7 @@ export default function HomePage() {
                                     <polyline points="22,6 12,13 2,6" />
                                 </svg>
                             </a>
-                            <a href="www.linkedin.com/in/jagadeeshwar-c-v-018548316" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
+                            <a href="https://www.linkedin.com/in/jagadeeshwar-c-v-018548316" target="_blank" rel="noopener noreferrer" className="social-icon" title="LinkedIn">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                                 </svg>
