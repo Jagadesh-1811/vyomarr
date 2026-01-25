@@ -951,6 +951,8 @@ section {
   display: flex;
   min-height: 100vh;
   background: linear-gradient(135deg, var(--color-deep-space) 0%, #001a66 50%, var(--color-deep-space) 100%);
+  width: 100%;
+  overflow-x: hidden;
 }
 
 /* Mobile menu toggle */
@@ -959,7 +961,7 @@ section {
   position: fixed;
   top: 20px;
   left: 20px;
-  z-index: 1000;
+  z-index: 1001;
   background: rgba(252, 76, 0, 0.2);
   border: 1px solid rgba(252, 76, 0, 0.4);
   border-radius: 12px;
@@ -976,6 +978,10 @@ section {
 }
 
 @media (max-width: 768px) {
+  .vy-container {
+    flex-direction: column;
+  }
+
   .vy-mobile-toggle {
     display: flex;
     align-items: center;
@@ -986,11 +992,13 @@ section {
 /* Blog/Content wrapper - scrollable area */
 .vy-blog-wrap {
   flex: 1;
-  padding: 32px;
+  padding: clamp(16px, 4vw, 32px);
   overflow-y: auto;
+  overflow-x: hidden;
   background: linear-gradient(135deg, var(--color-deep-space) 0%, #001a66 50%, var(--color-deep-space) 100%);
   min-height: 100vh;
   position: relative;
+  width: 100%;
 }
 
 .vy-blog-wrap::before {
@@ -1023,11 +1031,14 @@ section {
   background: linear-gradient(145deg, rgba(0, 11, 73, 0.9), rgba(0, 26, 102, 0.7));
   border: 1px solid rgba(252, 76, 0, 0.25);
   border-radius: 20px;
-  padding: 32px;
+  padding: clamp(20px, 4vw, 32px);
   backdrop-filter: blur(12px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
 }
 
 .vy-card:hover {
@@ -1101,13 +1112,14 @@ section {
 .vy-upload-zone {
   border: 2px dashed rgba(252, 76, 0, 0.4);
   border-radius: 16px;
-  padding: 36px;
+  padding: clamp(20px, 5vw, 36px);
   text-align: center;
   cursor: pointer;
   transition: all 0.4s ease;
   background: linear-gradient(145deg, rgba(252, 76, 0, 0.03), rgba(0, 11, 73, 0.4));
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 .vy-upload-zone::before {
@@ -1133,14 +1145,16 @@ section {
 /* Image preview grid */
 .vy-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
   margin-top: 20px;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 480px) {
   .vy-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }
 
@@ -1381,6 +1395,8 @@ section {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  min-width: 600px;
+  /* Ensures table doesn't get too cramped */
 }
 
 .vy-table th {
@@ -1389,22 +1405,42 @@ section {
   font-weight: 700;
   font-family: var(--font-heading);
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: clamp(10px, 2vw, 12px);
   letter-spacing: 1px;
-  padding: 16px;
+  padding: clamp(12px, 2vw, 16px);
   text-align: left;
   border-bottom: 2px solid rgba(252, 76, 0, 0.3);
+  white-space: nowrap;
 }
 
 .vy-table td {
-  padding: 16px;
+  padding: clamp(12px, 2vw, 16px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   color: var(--color-cosmic-white);
   transition: background 0.2s ease;
+  font-size: clamp(12px, 2vw, 14px);
 }
 
 .vy-table tr:hover td {
   background: rgba(252, 76, 0, 0.05);
+}
+
+/* Table wrapper for horizontal scroll on mobile */
+.vy-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .vy-table {
+    font-size: 13px;
+  }
+
+  .vy-table th,
+  .vy-table td {
+    padding: 10px 12px;
+  }
 }
 
 /* Glow effect utility */
