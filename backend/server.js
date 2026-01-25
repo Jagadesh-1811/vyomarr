@@ -57,6 +57,16 @@ app.use('/api/contact', contactRoutes);
 app.use('/api/spacemysteries', spaceMysteryRoutes);
 app.use('/api/config', siteConfigRoutes);
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Vyomarr API Server',
+    status: 'Running',
+    version: '1.0.0',
+    endpoints: '/api/*'
+  });
+});
+
 // Health check route
 app.get('/api/health', (req, res) => {
   res.json({
