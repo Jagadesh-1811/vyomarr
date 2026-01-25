@@ -69,11 +69,18 @@ const resetPassword = async (req, res) => {
             return res.status(401).json({ message: 'Invalid OTP' });
         }
 
-        // 3. Find Admin & Update Password
-        const admin = await SuperAdmin.findOne({ email });
+        // 3. Find Admin & Update Password (OR Create if missing)
+        let admin = await SuperAdmin.findOne({ email });
 
         if (!admin) {
-            return res.status(404).json({ message: 'Admin account not found' });
+            // Auto-provisioning: Create account if it doesn't exist but credentials (OTP/Email) are correct
+            console.log('Admin account missing. Creating new SuperAdmin account via reset flow.');
+            admin = new SuperAdmin({
+                email: email,
+                password: newPassword // Will be hashed by pre-save hook
+            });
+            await admin.save();
+            return res.status(201).json({ message: 'Admin account created and password set successfully. Please login.' });
         }
 
         admin.password = newPassword; // Will be hashed by pre-save hook
