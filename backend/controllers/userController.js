@@ -549,6 +549,17 @@ const likeArticle = async (req, res) => {
       likedAt: new Date()
     });
 
+    // Save the user to persist the like
+    await user.save();
+
+    // Update the article's votes count
+    const SpaceMystery = require('../models/SpaceMystery');
+    if (articleType === 'whatif') {
+      await WhatIf.findByIdAndUpdate(articleId, { $inc: { votes: 1 } });
+    } else {
+      await SpaceMystery.findByIdAndUpdate(articleId, { $inc: { votes: 1 } });
+    }
+
     // Add activity
     await user.addActivity('like', 'Liked an article', articleId, articleType || 'article');
 
@@ -582,12 +593,34 @@ const unlikeArticle = async (req, res) => {
       });
     }
 
+    // Find the liked article to get its type before removing
+    const likedItem = user.likedArticles.find(
+      item => item.articleId?.toString() === articleId
+    );
+
+    if (!likedItem) {
+      return res.status(400).json({
+        success: false,
+        error: 'Article not in liked list'
+      });
+    }
+
+    const articleType = likedItem.articleType;
+
     // Remove from liked articles
     user.likedArticles = user.likedArticles.filter(
       item => item.articleId?.toString() !== articleId
     );
 
     await user.save();
+
+    // Decrement the article's votes count
+    const SpaceMystery = require('../models/SpaceMystery');
+    if (articleType === 'whatif') {
+      await WhatIf.findByIdAndUpdate(articleId, { $inc: { votes: -1 } });
+    } else {
+      await SpaceMystery.findByIdAndUpdate(articleId, { $inc: { votes: -1 } });
+    }
 
     res.status(200).json({
       success: true,

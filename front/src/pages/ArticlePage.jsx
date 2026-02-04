@@ -195,6 +195,8 @@ export default function ArticlePage() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const [isLiking, setIsLiking] = useState(false)
+
   const toggleLike = async () => {
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
 
@@ -203,15 +205,20 @@ export default function ArticlePage() {
       return
     }
 
+    // Prevent multiple clicks
+    if (isLiking) return
+    setIsLiking(true)
+
     try {
+      let response
       if (isLiked) {
         // Unlike
-        await fetch(`${API_URL}/api/users/${user.uid}/liked-articles/${id}`, {
+        response = await fetch(`${API_URL}/api/users/${user.uid}/liked-articles/${id}`, {
           method: 'DELETE'
         })
       } else {
         // Like
-        await fetch(`${API_URL}/api/users/${user.uid}/liked-articles`, {
+        response = await fetch(`${API_URL}/api/users/${user.uid}/liked-articles`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -220,10 +227,24 @@ export default function ArticlePage() {
           })
         })
       }
-      setIsLiked(!isLiked)
-      setLikeCount(prev => isLiked ? prev - 1 : prev + 1)
+
+      const data = await response.json()
+
+      // Only update UI if the request was successful
+      if (response.ok && data.success) {
+        setIsLiked(!isLiked)
+        setLikeCount(prev => isLiked ? Math.max(0, prev - 1) : prev + 1)
+      } else if (data.error === 'Article already liked') {
+        // Already liked - sync the UI state
+        setIsLiked(true)
+      } else if (data.error === 'Article not in liked list') {
+        // Already unliked - sync the UI state
+        setIsLiked(false)
+      }
     } catch (error) {
       console.error('Error toggling like:', error)
+    } finally {
+      setIsLiking(false)
     }
   }
 
