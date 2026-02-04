@@ -331,7 +331,7 @@ export default function IssuesPage() {
                     box-shadow: 0 0 0 3px rgba(252, 76, 0, 0.15);
                 }
 
-                option { background-color: var(--color-deep-navy); color: var(--color-cosmic-white); }
+                option { background-color: var(--color-deep-space); color: var(--color-cosmic-white); }
 
                 .checkbox-group {
                     display: grid;

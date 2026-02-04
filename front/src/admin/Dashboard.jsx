@@ -63,7 +63,11 @@ export default function Dashboard() {
 
   return (
     <div className="vy-container">
-      <button className="vy-mobile-toggle" onClick={() => setSidebarOpen(true)}>
+      <button
+        className="vy-mobile-toggle"
+        onClick={() => setSidebarOpen(true)}
+        style={{ display: sidebarOpen ? 'none' : undefined }}
+      >
         <Menu size={24} />
       </button>
 

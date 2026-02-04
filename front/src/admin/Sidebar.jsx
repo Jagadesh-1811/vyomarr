@@ -88,19 +88,19 @@ export default function Sidebar({ activeSection, setActiveSection, sidebarOpen, 
   return (
     <>
       {/* Mobile Overlay */}
-      {sidebarOpen && (
-        <div
-          onClick={() => setSidebarOpen(false)}
-          style={{
-            position: 'fixed',
-            inset: 0,
-            background: 'rgba(0, 0, 0, 0.5)',
-            zIndex: 999,
-            display: 'none'
-          }}
-          className="mobile-overlay"
-        />
-      )}
+      <div
+        onClick={() => setSidebarOpen(false)}
+        className="mobile-overlay"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'rgba(0, 0, 0, 0.7)',
+          zIndex: 999,
+          opacity: sidebarOpen ? 1 : 0,
+          pointerEvents: sidebarOpen ? 'auto' : 'none',
+          transition: 'opacity 0.3s ease'
+        }}
+      />
 
       <aside style={{
         width: '280px',
@@ -292,6 +292,11 @@ export default function Sidebar({ activeSection, setActiveSection, sidebarOpen, 
 
         {/* Responsive Styles */}
         <style>{`
+          /* Hide overlay on desktop */
+          .mobile-overlay {
+            display: none;
+          }
+          
           @media (max-width: 768px) {
             .admin-sidebar {
               position: fixed !important;
@@ -303,7 +308,7 @@ export default function Sidebar({ activeSection, setActiveSection, sidebarOpen, 
             }
             
             .mobile-overlay {
-              display: ${sidebarOpen ? 'block' : 'none'} !important;
+              display: block !important;
             }
 
             .mobile-close-btn {

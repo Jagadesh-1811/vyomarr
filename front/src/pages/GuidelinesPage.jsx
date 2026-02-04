@@ -14,7 +14,7 @@ export default function GuidelinesPage() {
 
                     {/* Purpose */}
                     <section className="content-section">
-                        <h2 className="section-title"><span className="icon">🎯</span> Purpose</h2>
+                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none" /><path d="M10 6v4l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" /></svg></span> Purpose</h2>
                         <div className="section-content">
                             <p>Vyomarr provides a dedicated space for imaginative, speculative, and perspective-shifting ideas rooted in science domains. The goal is to let users freely explore "What if?" scenarios, unconventional concepts, and bold hypotheses that inspire curiosity and new ways of thinking.</p>
                             <div className="highlight-box">
@@ -25,7 +25,7 @@ export default function GuidelinesPage() {
 
                     {/* What This Platform Allows */}
                     <section className="content-section">
-                        <h2 className="section-title"><span className="icon">✨</span> What This Platform Allows</h2>
+                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 2l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 14.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78L10 2z" /></svg></span> What This Platform Allows</h2>
                         <div className="section-content">
                             <p>Vyomarr welcomes any imaginative, hypothetical, or speculative idea connected to science, including:</p>
                             <ul>
@@ -43,7 +43,7 @@ export default function GuidelinesPage() {
 
                     {/* Core Principles */}
                     <section className="content-section">
-                        <h2 className="section-title"><span className="icon">📜</span> Core Principles for Submissions</h2>
+                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M4 4h12v12H4V4zm2 2v8h8V6H6zm1 1h6v2H7V7zm0 3h4v1H7v-1z" /></svg></span> Core Principles for Submissions</h2>
                         <div className="section-content">
                             <p>To maintain clarity while keeping creativity unrestricted, every post must include:</p>
                             <ul>
@@ -57,7 +57,7 @@ export default function GuidelinesPage() {
 
                     {/* Creativity Rules */}
                     <section className="content-section">
-                        <h2 className="section-title"><span className="icon">🚀</span> Creativity & Imagination Rules</h2>
+                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 2L3 7v11h14V7l-7-5zm0 2.5L15 8v8H5V8l5-3.5z" /><path d="M10 8l2 4h-4l2-4z" /></svg></span> Creativity & Imagination Rules</h2>
                         <div className="section-content">
                             <p><strong>Allowed without limitation:</strong></p>
                             <ul>
@@ -76,7 +76,7 @@ export default function GuidelinesPage() {
 
                     {/* Quality */}
                     <section className="content-section">
-                        <h2 className="section-title"><span className="icon">📝</span> Quality and Presentation Expectations</h2>
+                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg></span> Quality and Presentation Expectations</h2>
                         <div className="section-content">
                             <div className="two-column">
                                 <div>
@@ -104,7 +104,7 @@ export default function GuidelinesPage() {
 
                     {/* Review Process */}
                     <section className="content-section">
-                        <h2 className="section-title"><span className="icon">⚙️</span> Review and Publication Process</h2>
+                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" /></svg></span> Review and Publication Process</h2>
                         <div className="section-content">
                             <p>Each "What If" submission goes through:</p>
                             <div className="process-steps">
@@ -129,7 +129,7 @@ export default function GuidelinesPage() {
 
                     {/* Prohibited */}
                     <section className="content-section prohibited-section">
-                        <h2 className="section-title"><span className="icon">🚫</span> Prohibited Content</h2>
+                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 008.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clipRule="evenodd" /></svg></span> Prohibited Content</h2>
                         <div className="section-content">
                             <p>To maintain a safe space for creativity:</p>
                             <ul>

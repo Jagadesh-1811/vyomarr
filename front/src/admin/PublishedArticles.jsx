@@ -270,7 +270,7 @@ export default function PublishedArticles() {
             </div>
 
             {/* Filter Tabs */}
-            <div style={styles.tabs}>
+            <div className="admin-filter-tabs" style={styles.tabs}>
                 {[
                     { key: 'all', label: 'All', count: articles.length, icon: FileText },
                     { key: 'mysteries', label: 'Space Mysteries', count: mysteriesCount, icon: Rocket },
@@ -292,7 +292,7 @@ export default function PublishedArticles() {
                 ))}
             </div>
 
-            <div style={styles.grid}>
+            <div className="admin-articles-grid">
                 {filteredArticles.map((article) => (
                     <div key={article._id} style={{
                         ...styles.card,
@@ -355,7 +355,7 @@ export default function PublishedArticles() {
                         </div>
 
                         {/* Actions */}
-                        <div style={styles.cardActions}>
+                        <div className="admin-card-actions">
                             <Link
                                 to={`/article/${article._id}?type=${article.type === 'mystery' ? 'mystery' : 'whatif'}`}
                                 style={styles.viewButton}
@@ -453,7 +453,7 @@ export default function PublishedArticles() {
                             {editForm.images && editForm.images.length > 0 && (
                                 <div style={styles.formGroup}>
                                     <label style={styles.label}>Article Images ({editForm.images.length})</label>
-                                    <div style={styles.imagesGrid}>
+                                    <div className="admin-images-grid">
                                         {editForm.images.map((img, idx) => (
                                             <div key={idx} style={styles.imageCard}>
                                                 <img
