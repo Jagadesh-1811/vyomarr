@@ -10,6 +10,7 @@ const {
   getUserPublications,
   getUserStats,
   checkArticleSaved,
+  checkArticleLiked,
   getUserActivity,
   getUserComments,
   likeArticle,
@@ -45,6 +46,7 @@ router.get('/:firebaseUid/activity', getUserActivity);
 
 // Liked articles routes
 router.get('/:firebaseUid/liked-articles', getLikedArticles);
+router.get('/:firebaseUid/liked-articles/check/:articleId', checkArticleLiked);
 router.post('/:firebaseUid/liked-articles', likeArticle);
 router.delete('/:firebaseUid/liked-articles/:articleId', unlikeArticle);
 

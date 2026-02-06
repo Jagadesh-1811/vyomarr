@@ -82,7 +82,7 @@ export default function DashboardPage() {
         // Handle both success and 404 (no articles) cases
         if (data.success || response.status === 404) {
           const transformed = (data.data || []).map(item => ({
-            id: item.articleId,
+            id: item.articleId?.toString() || item.articleId,
             title: item.article?.title || 'Untitled',
             excerpt: item.article?.description?.substring(0, 150) || '',
             image: item.article?.imageUrl || 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?q=80&w=800',
@@ -434,7 +434,7 @@ export default function DashboardPage() {
                           </span>
                           <span>Liked {getTimeSince(article.likedAt)}</span>
                         </div>
-                        <Link to={`/article/${article.id}?type=${article.articleType || 'spacemystery'}`} className="read-more">Read Article →</Link>
+                        <Link to={`/article/${article.id}?type=${article.articleType === 'whatif' ? 'whatif' : 'mystery'}`} className="read-more">Read Article →</Link>
                       </article>
                     ))}
                   </div>

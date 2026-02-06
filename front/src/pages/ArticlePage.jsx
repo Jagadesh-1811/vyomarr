@@ -39,6 +39,7 @@ export default function ArticlePage() {
   const [readingProgress, setReadingProgress] = useState(0)
   const [isSubmittingComment, setIsSubmittingComment] = useState(false)
   const [replyingTo, setReplyingTo] = useState(null) // Track which comment is being replied to
+  const [likeCheckDone, setLikeCheckDone] = useState(false) // DEBUG: track when like check completes
 
   // Fetch article data from backend
   useEffect(() => {
@@ -147,10 +148,19 @@ export default function ArticlePage() {
 
   // Check if article is liked/saved by user
   useEffect(() => {
+    console.log('=== LIKE CHECK USEEFFECT ===');
+    console.log('user:', user);
+    console.log('user.uid:', user?.uid);
+    console.log('id:', id);
+
     const checkLikedSavedStatus = async () => {
-      if (!user || !id) return
+      if (!user || !id) {
+        console.log('Early return - user or id missing');
+        return
+      }
       try {
         const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+        console.log('API_URL:', API_URL);
 
         // Check saved status
         const savedRes = await fetch(`${API_URL}/api/users/${user.uid}/saved-articles/check/${id}`)
@@ -159,19 +169,25 @@ export default function ArticlePage() {
           if (savedData.success) setIsSaved(savedData.isSaved)
         }
 
-        // Check liked status - fetch all liked and check if current article is in it
-        const likedRes = await fetch(`${API_URL}/api/users/${user.uid}/dashboard`)
+        // Check liked status
+        console.log('Checking like status for article:', id, 'user:', user.uid)
+        const likedRes = await fetch(`${API_URL}/api/users/${user.uid}/liked-articles/check/${id}`)
+        console.log('Like check response status:', likedRes.status)
         if (likedRes.ok) {
           const likedData = await likedRes.json()
-          if (likedData.success && likedData.data?.likedArticles) {
-            const isArticleLiked = likedData.data.likedArticles?.some(
-              item => item.articleId?.toString() === id
-            )
-            setIsLiked(isArticleLiked || false)
+          console.log('Like check data:', likedData)
+          console.log('likedData.isLiked value:', likedData.isLiked, 'type:', typeof likedData.isLiked)
+          if (likedData.success) {
+            setIsLiked(likedData.isLiked)
+            setLikeCheckDone(true)
           }
+        } else {
+          console.log('Like check failed:', await likedRes.text())
+          setLikeCheckDone(true)
         }
       } catch (err) {
         console.error('Error checking liked/saved status:', err)
+        setLikeCheckDone(true)
       }
     }
 
@@ -503,7 +519,6 @@ export default function ArticlePage() {
                     ) : (
                       <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                     )}
-                    <span>{likeCount}</span>
                   </button>
                   <button className={`action-btn ${isSaved ? 'active' : ''}`} onClick={toggleSave}>
                     {isSaved ? (

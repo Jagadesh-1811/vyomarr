@@ -409,6 +409,48 @@ const checkArticleSaved = async (req, res) => {
   }
 };
 
+// @desc    Check if article is liked
+// @route   GET /api/users/:firebaseUid/liked-articles/check/:articleId
+// @access  Private
+const checkArticleLiked = async (req, res) => {
+  try {
+    const { firebaseUid, articleId } = req.params;
+    console.log('=== CHECK LIKED DEBUG ===');
+    console.log('firebaseUid:', firebaseUid);
+    console.log('articleId:', articleId);
+
+    const user = await User.findOne({ firebaseUid });
+    console.log('User found:', !!user);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        error: 'User not found'
+      });
+    }
+
+    console.log('User likedArticles count:', user.likedArticles?.length || 0);
+    console.log('LikedArticles IDs:', user.likedArticles?.map(i => i.articleId?.toString()));
+
+    const isLiked = user.likedArticles.some(
+      item => item.articleId?.toString() === articleId
+    );
+    console.log('isLiked result:', isLiked);
+    console.log('=========================');
+
+    res.status(200).json({
+      success: true,
+      isLiked
+    });
+  } catch (error) {
+    console.error('Check liked error:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Server error checking liked status'
+    });
+  }
+};
+
 // @desc    Get user's recent activity
 // @route   GET /api/users/:firebaseUid/activity
 // @access  Private
@@ -781,6 +823,7 @@ module.exports = {
   getUserPublications,
   getUserStats,
   checkArticleSaved,
+  checkArticleLiked,
   getUserActivity,
   getUserComments,
   likeArticle,
