@@ -249,15 +249,7 @@ export default function CommunityPage() {
               </table>
             </div>
 
-            <div className="protocol-cta">
-              <p>
-                If you're ready to begin, start with the one that resonates with how you explore ideas—and join
-                the growing network of people who believe in the power of science and imagination.
-              </p>
-              <Link to="/login" className="btn-cosmic">
-                Start Your Journey
-              </Link>
-            </div>
+            
           </div>
         </section>
       </main>

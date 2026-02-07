@@ -1,182 +1,169 @@
 import { Link } from 'react-router-dom'
 
 export default function GuidelinesPage() {
+    const sections = [
+        {
+            number: '01',
+            title: 'Purpose',
+            content: [
+                { text: 'Vyomarr provides a dedicated space for imaginative, speculative, and perspective-shifting ideas rooted in science domains. The goal is to let users freely explore "What if?" scenarios, unconventional concepts, and bold hypotheses that inspire curiosity and new ways of thinking.' }
+            ],
+            important: 'Every submission undergoes review to ensure clarity and safety, then is published for the world.'
+        },
+        {
+            number: '02',
+            title: 'What This Platform Allows',
+            content: [
+                { text: 'Vyomarr welcomes any imaginative, hypothetical, or speculative idea connected to science, including:' }
+            ],
+            list: [
+                'Aerospace, space exploration, propulsion, astrobiology',
+                'Physics, cosmology, quantum thought explorations',
+                'Emerging engineering visions, futuristic technologies',
+                'Alternate scientific perspectives, scenario-based reasoning',
+                'Bold "What if?" questions that challenge assumptions'
+            ],
+            note: 'There is no limit to creativity or curiosity. If it sparks new thinking, it belongs here.'
+        },
+        {
+            number: '03',
+            title: 'Core Principles for Submissions',
+            content: [
+                { text: 'To maintain clarity while keeping creativity unrestricted, every post must include:' }
+            ],
+            list: [
+                'A clear statement that the idea is hypothetical or speculative',
+                'A short "What if?" framing to state the imaginative question behind the concept',
+                'Distinguish known scientific facts from the creative leap (both are allowed)',
+                'Use science as inspiration, not restriction—impossible ideas are allowed as long as they are labeled speculative'
+            ]
+        },
+        {
+            number: '04',
+            title: 'Creativity & Imagination Rules',
+            content: [
+                { text: 'Allowed without limitation:' }
+            ],
+            list: [
+                'Impossible physics (FTL, wormholes, antigravity) if marked as hypothetical',
+                'Alternate universe reasoning',
+                'Conceptual future technologies',
+                'Unconventional models that break current scientific understanding',
+                'New perspectives on old theories',
+                'Cross-domain ideas blending science and imagination'
+            ],
+            note: 'Vyomarr exists to explore mental frontiers, not constrain them.'
+        },
+        {
+            number: '05',
+            title: 'Quality and Presentation Expectations',
+            subsections: [
+                {
+                    title: 'Submissions should be:',
+                    items: [
+                        'Understandable (explain the idea step-by-step)',
+                        'Structured (title, summary, main idea)',
+                        'Clear about where imagination begins',
+                        'Free of real-world harmful instructions',
+                        'Respectful of scientific inspiration'
+                    ]
+                },
+                {
+                    title: 'Optional but encouraged:',
+                    items: [
+                        'Diagrams or visual concepts',
+                        'Comparisons to existing science',
+                        'Multiple perspectives around the idea',
+                        'Open-ended questions for others to build upon'
+                    ]
+                }
+            ]
+        },
+        {
+            number: '06',
+            title: 'Review and Publication Process',
+            content: [
+                { text: 'Each "What If" submission goes through:' }
+            ],
+            list: [
+                '1. Clarity Check: Idea is understandable and properly framed as hypothetical',
+                '2. Safety Check: No harmful or real-world dangerous instructions',
+                '3. Science Domain Check: Idea relates broadly to science or engineering',
+                '4. Publication: Content goes live with appropriate tags'
+            ],
+            note: 'Moderators may request edits to improve clarity before publication.'
+        },
+        {
+            number: '07',
+            title: 'Prohibited Content',
+            content: [
+                { text: 'To maintain a safe space for creativity:' }
+            ],
+            list: [
+                'No real-world weapon instructions or disasters',
+                'No personal attacks, hate speech, or harassment',
+                'No fraud claiming scientific authority',
+                'No plagiarism or copyrighted material without permission'
+            ],
+            important: 'Speculative science is welcome; real-world harm is not.'
+        }
+    ]
+
     return (
         <>
             <div className="guidelines-page">
-                <div className="glow-bg"></div>
-
                 <div className="guidelines-container">
                     <header className="page-header">
                         <h1>What-If Submission <span className="accent">Guidelines</span></h1>
                         <p>Explore Without Limits — Your guide to sharing imaginative, speculative, and perspective-shifting ideas on Vyomarr.</p>
                     </header>
 
-                    {/* Purpose */}
-                    <section className="content-section">
-                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1" fill="none" /><path d="M10 6v4l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" /></svg></span> Purpose</h2>
-                        <div className="section-content">
+                    <div className="policy-section">
+                        {/* Intro Card */}
+                        <article className="glass-card intro-card">
                             <p>Vyomarr provides a dedicated space for imaginative, speculative, and perspective-shifting ideas rooted in science domains. The goal is to let users freely explore "What if?" scenarios, unconventional concepts, and bold hypotheses that inspire curiosity and new ways of thinking.</p>
-                            <div className="highlight-box">
-                                <p>Every submission undergoes review to ensure clarity and safety, then is published for the world.</p>
-                            </div>
-                        </div>
-                    </section>
+                        </article>
 
-                    {/* What This Platform Allows */}
-                    <section className="content-section">
-                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 2l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 14.27l-4.77 2.44.91-5.32-3.87-3.77 5.34-.78L10 2z" /></svg></span> What This Platform Allows</h2>
-                        <div className="section-content">
-                            <p>Vyomarr welcomes any imaginative, hypothetical, or speculative idea connected to science, including:</p>
-                            <ul>
-                                <li>Aerospace, space exploration, propulsion, astrobiology</li>
-                                <li>Physics, cosmology, quantum thought explorations</li>
-                                <li>Emerging engineering visions, futuristic technologies</li>
-                                <li>Alternate scientific perspectives, scenario-based reasoning</li>
-                                <li>Bold "What if?" questions that challenge assumptions</li>
-                            </ul>
-                            <div className="highlight-box">
-                                <p>There is no limit to creativity or curiosity. If it sparks new thinking, it belongs here.</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Core Principles */}
-                    <section className="content-section">
-                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M4 4h12v12H4V4zm2 2v8h8V6H6zm1 1h6v2H7V7zm0 3h4v1H7v-1z" /></svg></span> Core Principles for Submissions</h2>
-                        <div className="section-content">
-                            <p>To maintain clarity while keeping creativity unrestricted, every post must include:</p>
-                            <ul>
-                                <li>A clear statement that the idea is hypothetical or speculative</li>
-                                <li>A short "What if?" framing to state the imaginative question behind the concept</li>
-                                <li>Distinguish known scientific facts from the creative leap (both are allowed)</li>
-                                <li>Use science as inspiration, not restriction—impossible ideas are allowed as long as they are labeled speculative</li>
-                            </ul>
-                        </div>
-                    </section>
-
-                    {/* Creativity Rules */}
-                    <section className="content-section">
-                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M10 2L3 7v11h14V7l-7-5zm0 2.5L15 8v8H5V8l5-3.5z" /><path d="M10 8l2 4h-4l2-4z" /></svg></span> Creativity & Imagination Rules</h2>
-                        <div className="section-content">
-                            <p><strong>Allowed without limitation:</strong></p>
-                            <ul>
-                                <li>Impossible physics (FTL, wormholes, antigravity) if marked as hypothetical</li>
-                                <li>Alternate universe reasoning</li>
-                                <li>Conceptual future technologies</li>
-                                <li>Unconventional models that break current scientific understanding</li>
-                                <li>New perspectives on old theories</li>
-                                <li>Cross-domain ideas blending science and imagination</li>
-                            </ul>
-                            <div className="highlight-box">
-                                <p>Vyomarr exists to explore mental frontiers, not constrain them.</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Quality */}
-                    <section className="content-section">
-                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg></span> Quality and Presentation Expectations</h2>
-                        <div className="section-content">
-                            <div className="two-column">
-                                <div>
-                                    <p><strong>Submissions should be:</strong></p>
-                                    <ul>
-                                        <li>Understandable (explain the idea step-by-step)</li>
-                                        <li>Structured (title, summary, main idea)</li>
-                                        <li>Clear about where imagination begins</li>
-                                        <li>Free of real-world harmful instructions</li>
-                                        <li>Respectful of scientific inspiration</li>
-                                    </ul>
+                        {sections.map((section, idx) => (
+                            <article key={idx} className="glass-card">
+                                <div className="glass-card-header">
+                                    <span className="section-number">{section.number}</span>
+                                    <h3>{section.title}</h3>
                                 </div>
-                                <div>
-                                    <p><strong>Optional but encouraged:</strong></p>
-                                    <ul>
-                                        <li>Diagrams or visual concepts</li>
-                                        <li>Comparisons to existing science</li>
-                                        <li>Multiple perspectives around the idea</li>
-                                        <li>Open-ended questions for others to build upon</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Review Process */}
-                    <section className="content-section">
-                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" /></svg></span> Review and Publication Process</h2>
-                        <div className="section-content">
-                            <p>Each "What If" submission goes through:</p>
-                            <div className="process-steps">
-                                {[
-                                    { num: 1, title: 'Clarity Check', desc: 'Idea is understandable and properly framed as hypothetical' },
-                                    { num: 2, title: 'Safety Check', desc: 'No harmful or real-world dangerous instructions' },
-                                    { num: 3, title: 'Science Domain Check', desc: 'Idea relates broadly to science or engineering' },
-                                    { num: 4, title: 'Publication', desc: 'Content goes live with appropriate tags' }
-                                ].map(step => (
-                                    <div key={step.num} className="process-step">
-                                        <span className="step-number">{step.num}</span>
-                                        <div className="step-content">
-                                            <h4>{step.title}</h4>
-                                            <p>{step.desc}</p>
-                                        </div>
+                                {section.content?.map((c, i) => <p key={i}>{c.text}</p>)}
+                                {section.subsections?.map((sub, i) => (
+                                    <div key={i}>
+                                        <h4>{sub.title}</h4>
+                                        <p>{sub.intro}</p>
+                                        <ul>{sub.items.map((item, j) => <li key={j}>{item}</li>)}</ul>
+                                        {sub.extra && <><p>{sub.extra}</p><ul>{sub.extraItems.map((item, j) => <li key={j}>{item}</li>)}</ul></>}
+                                        {sub.note && <p>{sub.note}</p>}
                                     </div>
                                 ))}
-                            </div>
-                            <p className="note">Moderators may request edits to improve clarity before publication.</p>
-                        </div>
-                    </section>
-
-                    {/* Prohibited */}
-                    <section className="content-section prohibited-section">
-                        <h2 className="section-title"><span className="icon"><svg fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M13.477 14.89A6 6 0 015.11 6.524l8.367 8.368zm1.414-1.414L6.524 5.11a6 6 0 008.367 8.367zM18 10a8 8 0 11-16 0 8 8 0 0116 0z" clipRule="evenodd" /></svg></span> Prohibited Content</h2>
-                        <div className="section-content">
-                            <p>To maintain a safe space for creativity:</p>
-                            <ul>
-                                <li>No real-world weapon instructions or disasters</li>
-                                <li>No personal attacks, hate speech, or harassment</li>
-                                <li>No fraud claiming scientific authority</li>
-                                <li>No plagiarism or copyrighted material without permission</li>
-                            </ul>
-                            <div className="highlight-box warning">
-                                <p>Speculative science is welcome; real-world harm is not.</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    {/* Footer Note */}
-                    <div className="footer-note">
-                        <p><span className="accent">Vyomarr</span> — Where Imagination Meets the Cosmos</p>
+                                {section.list && <ul>{section.list.map((item, i) => <li key={i}>{item}</li>)}</ul>}
+                                {section.important && <p className="important">{section.important}</p>}
+                                {section.note && <p>{section.note}</p>}
+                            </article>
+                        ))}
                     </div>
+
+                    <section className="contact-container">
+                        <h3>Questions About Guidelines?</h3>
+                        <p>If you have questions or concerns about these guidelines, you may contact us at:</p>
+                        <p className="email">support@vyomarr.com</p>
+                        <p className="website">Website: https://vyomarr.com</p>
+                        <Link to="/contact" className="btn-glow">CONTACT US</Link>
+                    </section>
                 </div>
             </div>
 
             <style>{`
-                .guidelines-page {
-                    min-height: 100vh;
-                    position: relative;
-                }
-
-                .glow-bg {
-                    position: fixed;
-                    top: 0; left: 0;
-                    width: 100%; height: 100%;
-                    z-index: -2;
-                    background: radial-gradient(ellipse at 50% 50%, rgba(0, 50, 120, 0.15) 0%, rgba(0, 11, 73, 0) 50%);
-                    animation: pulseGlow 8s ease-in-out infinite;
-                }
-
-                @keyframes pulseGlow {
-                    0%, 100% { opacity: 0.3; transform: scale(1); }
-                    50% { opacity: 0.6; transform: scale(1.1); }
-                }
+                .guidelines-page { min-height: 100vh; }
 
                 .guidelines-container {
-                    max-width: 1200px;
+                    max-width: 1000px;
                     margin: 0 auto;
                     padding: 120px 40px 80px;
-                    position: relative;
-                    z-index: 10;
                 }
 
                 .page-header {
@@ -186,30 +173,37 @@ export default function GuidelinesPage() {
 
                 .page-header h1 {
                     font-size: 3rem;
-                    margin-bottom: 16px;
+                    margin-bottom: 15px;
+                    text-transform: uppercase;
                     letter-spacing: 1px;
                     color: var(--color-cosmic-white);
                 }
 
                 .page-header .accent { color: var(--color-space-orange); }
 
-                .page-header p {
-                    font-size: 1.2rem;
+                .page-header > p {
                     color: var(--color-mist-gray);
+                    font-size: 1.1rem;
                     max-width: 700px;
                     margin: 0 auto;
                 }
 
-                .content-section {
+                .policy-section {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 30px;
+                }
+
+                .glass-card {
                     background: rgba(255, 255, 255, 0.03);
                     border-radius: 24px;
-                    padding: 40px;
-                    margin-bottom: 32px;
+                    padding: 32px;
+                    transition: all 0.3s;
                     position: relative;
                     overflow: hidden;
                 }
 
-                .content-section::after {
+                .glass-card::after {
                     content: '';
                     position: absolute;
                     inset: 0;
@@ -224,149 +218,154 @@ export default function GuidelinesPage() {
                     z-index: 0;
                 }
 
-                .content-section > * { position: relative; z-index: 1; }
+                .glass-card > * { position: relative; z-index: 1; }
 
-                .section-title {
-                    font-size: 1.5rem;
+                .glass-card:hover {
+                    transform: translateY(-5px);
+                    background: rgba(255, 255, 255, 0.05);
+                }
+
+                .intro-card p {
+                    font-size: 1.1rem;
                     color: var(--color-cosmic-white);
-                    margin-bottom: 20px;
+                    margin: 0;
+                }
+
+                .glass-card-header {
                     display: flex;
                     align-items: center;
-                    gap: 12px;
+                    gap: 20px;
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                    padding-bottom: 15px;
                 }
 
-                .section-title .icon {
+                .section-number {
+                    font-family: var(--font-tech);
+                    font-size: 1.2rem;
                     color: var(--color-space-orange);
-                    font-size: 1.3rem;
+                    font-weight: bold;
+                    background: rgba(252, 76, 0, 0.1);
+                    padding: 8px 14px;
+                    border-radius: 8px;
                 }
 
-                .section-content p {
-                    margin-bottom: 16px;
-                    line-height: 1.8;
+                .glass-card h3 {
+                    font-size: 1.5rem;
+                    margin: 0;
+                    color: var(--color-cosmic-white);
+                }
+
+                .glass-card h4 {
+                    font-size: 1.1rem;
+                    color: var(--color-space-orange);
+                    margin: 20px 0 10px 0;
+                }
+
+                .glass-card p {
+                    font-size: 1rem;
                     color: var(--color-mist-gray);
-                }
-
-                .section-content p strong { color: var(--color-cosmic-white); }
-
-                .section-content ul {
-                    list-style: none;
-                    padding-left: 0;
-                    margin-bottom: 16px;
-                }
-
-                .section-content ul li {
-                    position: relative;
-                    padding-left: 28px;
-                    margin-bottom: 12px;
                     line-height: 1.7;
-                    color: var(--color-mist-gray);
+                    margin-bottom: 15px;
                 }
 
-                .section-content ul li::before {
-                    content: '✦';
+                .glass-card ul {
+                    margin: 15px 0;
+                    padding-left: 0;
+                    list-style: none;
+                }
+
+                .glass-card li {
+                    color: var(--color-mist-gray);
+                    padding: 10px 0 10px 28px;
+                    position: relative;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+                }
+
+                .glass-card li:last-child { border-bottom: none; }
+
+                .glass-card li::before {
+                    content: '';
                     position: absolute;
                     left: 0;
-                    color: var(--color-space-orange);
-                    font-size: 0.8rem;
-                }
-
-                .highlight-box {
-                    background: rgba(252, 76, 0, 0.1);
-                    border-left: 3px solid var(--color-space-orange);
-                    padding: 20px 24px;
-                    border-radius: 0 12px 12px 0;
-                    margin: 24px 0;
-                }
-
-                .highlight-box p {
-                    color: var(--color-cosmic-white);
-                    margin: 0;
-                }
-
-                .highlight-box.warning {
-                    background: rgba(239, 68, 68, 0.15);
-                    border-color: #ef4444;
-                }
-
-                .two-column {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 32px;
-                }
-
-                .process-steps {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 16px;
-                }
-
-                .process-step {
-                    display: flex;
-                    align-items: flex-start;
-                    gap: 16px;
-                    padding: 16px;
-                    background: rgba(255, 255, 255, 0.02);
-                    border-radius: 12px;
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                }
-
-                .step-number {
-                    width: 36px;
-                    height: 36px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 8px;
+                    height: 8px;
                     background: var(--color-space-orange);
                     border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
+                }
+
+                .important {
+                    color: var(--color-space-orange) !important;
+                    font-weight: bold;
+                }
+
+                .contact-container {
+                    margin-top: 60px;
+                    text-align: center;
+                    padding: 50px;
+                    background: rgba(255, 255, 255, 0.03);
+                    border-radius: 24px;
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .contact-container::after {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    border-radius: 24px;
+                    padding: 1px;
+                    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.1) 100%);
+                    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+                    -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+                    pointer-events: none;
+                    z-index: 0;
+                }
+
+                .contact-container > * { position: relative; z-index: 1; }
+
+                .contact-container h3 {
+                    margin-bottom: 15px;
+                    color: var(--color-cosmic-white);
+                }
+
+                .contact-container p { color: var(--color-mist-gray); margin-bottom: 10px; }
+
+                .email {
+                    font-family: var(--font-tech);
+                    color: var(--color-space-orange) !important;
+                    font-size: 1.1rem;
+                }
+
+                .website { font-family: var(--font-tech); }
+
+                .btn-glow {
+                    display: inline-block;
+                    margin-top: 25px;
+                    padding: 15px 40px;
+                    background: linear-gradient(90deg, var(--color-space-orange), #ff6a2b);
+                    color: var(--color-cosmic-white);
                     font-family: var(--font-heading);
                     font-weight: 700;
-                    font-size: 0.9rem;
-                    color: var(--color-cosmic-white);
-                    flex-shrink: 0;
+                    border-radius: 12px;
+                    transition: all 0.3s;
+                    text-decoration: none;
                 }
 
-                .step-content h4 {
-                    font-size: 1rem;
-                    margin-bottom: 4px;
-                    color: var(--color-cosmic-white);
-                }
-
-                .step-content p {
-                    font-size: 0.9rem;
-                    margin: 0;
-                }
-
-                .note {
-                    margin-top: 20px;
-                    font-style: italic;
-                }
-
-                .prohibited-section {
-                    background: rgba(239, 68, 68, 0.1);
-                    border: 1px solid rgba(239, 68, 68, 0.3);
-                }
-
-                .prohibited-section .section-title .icon { color: #ef4444; }
-                .prohibited-section ul li::before { content: '✕'; color: #ef4444; }
-
-                .footer-note {
-                    text-align: center;
-                    padding: 40px;
-                    color: var(--color-mist-gray);
-                    font-style: italic;
-                }
-
-                .footer-note .accent {
-                    color: var(--color-space-orange);
-                    font-style: normal;
-                    font-weight: 600;
+                .btn-glow:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 10px 30px rgba(252, 76, 0, 0.3);
                 }
 
                 @media (max-width: 768px) {
-                    .guidelines-container { padding: 80px 20px 60px; }
+                    .guidelines-container { padding: 100px 20px 60px; }
                     .page-header h1 { font-size: 2rem; }
-                    .content-section { padding: 28px; }
-                    .two-column { grid-template-columns: 1fr; }
+                    .glass-card { padding: 24px; }
+                    .glass-card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
                 }
             `}</style>
         </>
