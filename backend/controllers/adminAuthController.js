@@ -54,7 +54,7 @@ const authAdmin = async (req, res) => {
  * @access  Public
  */
 const resetPassword = async (req, res) => {
-    const { email, otp, newPassword } = req.body;
+    const { email, otp, otpNumber, newPassword } = req.body;
     const ALLOWED_EMAIL = 'mohanreddysaigovindu@gmail.com';
 
     try {
@@ -63,9 +63,17 @@ const resetPassword = async (req, res) => {
             return res.status(403).json({ message: 'Password reset not allowed for this account' });
         }
 
-        // 2. Verify OTP
-        const DEFAULT_OTP = process.env.DEFAULT_ADMIN_OTP || '98234';
-        if (otp !== DEFAULT_OTP) {
+        // 2. Verify OTP against the specific OTP key from .env
+        const OTP_MAP = {
+            1: process.env.ADMIN_OTP_1,
+            2: process.env.ADMIN_OTP_2,
+            3: process.env.ADMIN_OTP_3,
+            4: process.env.ADMIN_OTP_4,
+            5: process.env.ADMIN_OTP_5
+        };
+
+        const expectedOtp = OTP_MAP[otpNumber];
+        if (!expectedOtp || otp !== expectedOtp) {
             return res.status(401).json({ message: 'Invalid OTP' });
         }
 

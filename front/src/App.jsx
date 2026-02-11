@@ -22,13 +22,14 @@ import CookiesPage from './pages/CookiesPage'
 // Admin Panel Components
 import AdminLogin from './admin/Login'
 import AdminDashboard from './admin/Dashboard'
+import ProtectedRoute from './admin/protectedRoute'
 
 function App() {
     return (
         <Routes>
             {/* Admin Routes (outside main layout) */}
             <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
 
             {/* Login Route (outside main layout - no navbar/footer) */}
             <Route path="/login" element={<LoginPage />} />

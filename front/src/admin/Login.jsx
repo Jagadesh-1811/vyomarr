@@ -26,6 +26,7 @@ export default function Login() {
   const [resetError, setResetError] = useState('');
   const [resetSuccess, setResetSuccess] = useState('');
   const [isResetAllowed, setIsResetAllowed] = useState(false);
+  const [otpNumber, setOtpNumber] = useState(1);
 
   const navigate = useNavigate();
   const ALLOWED_EMAIL = 'mohanreddysaigovindu@gmail.com';
@@ -81,6 +82,7 @@ export default function Login() {
     setResetEmail('');
     setOtp('');
     setNewPassword('');
+    setOtpNumber(Math.floor(Math.random() * 5) + 1);
   };
 
   const handleEmailStep = (e) => {
@@ -121,6 +123,7 @@ export default function Login() {
       await axios.post('/api/admin/reset-password', {
         email: resetEmail,
         otp,
+        otpNumber,
         newPassword
       });
 
@@ -477,13 +480,13 @@ export default function Login() {
                 {resetStep === 2 && (
                   <div style={{ marginBottom: '20px' }}>
                     <label style={{ display: 'block', color: '#cbd5e1', marginBottom: '8px', fontSize: '14px' }}>
-                      Enter Verification OTP
+                      Enter Verification OTP <span style={{ color: '#fc4c00', fontWeight: '700' }}>#{otpNumber}</span>
                     </label>
                     <input
                       type="text"
                       value={otp}
                       onChange={(e) => setOtp(e.target.value)}
-                      placeholder="Enter OTP"
+                      placeholder={`Enter OTP ${otpNumber}`}
                       style={{
                         width: '100%',
                         padding: '12px',
@@ -497,7 +500,7 @@ export default function Login() {
                       }}
                     />
                     <p style={{ fontSize: '12px', color: '#94a3b8', marginTop: '8px' }}>
-                      Enter the secure OTP provided to you.
+                      Enter the OTP <strong style={{ color: '#fc4c00' }}>#{otpNumber}</strong> as mentioned in your admin credentials.
                     </p>
                   </div>
                 )}
